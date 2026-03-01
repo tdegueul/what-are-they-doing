@@ -128,3 +128,47 @@ By type  (n=2761)
   gateway              █ 1%                                           28
   webchat              █ 1%                                           26
 ```
+
+## Commit signals
+
+```
+https://github.com/Dicklesworthstone/pi_agent_rust/blob/main/.github/workflows/ci.ymlctories
+  2025-12-31  6517b05a  vietdev99/openclaw  feat commit changed code without tests; commit spans many files or directories
+```
+
+## Context switching
+
+```
+2025-12-01     5c   2r    1s  |.....                                                   |
+2025-12-02   100c   4r   99s  |........................................................|
+2025-12-03   100c   2r   75s  |BBBBBBBBBBDDDDDBBBBDDDDDBBBBBDDDDBBBBBDDDDDBBBBDDDDDDDDD|
+2025-12-04   100c  15r   91s  |........................................................|
+2025-12-05   100c   3r   99s  |........................................................|
+2025-12-06   100c   2r   25s  |GGGGGGGGGGGGGGGGGGGGGGGGGGGGGBBBBGGGGGBBBBBBBBBBBBBBBBBB|
+2025-12-07   100c   2r    1s  |EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEGGGGGGGGGGGGGGGGGGGGGGGGG|
+2025-12-08   100c   2r    1s  |AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACCCCCCCCCCC|
+2025-12-09   100c   1r    0s  |AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA|
+2025-12-10   100c   2r   77s  |BBBBBDDDDDBBBBBDDDDBBBBBDDDDDBBBBDDDDDBBBBBDDDDDDDDDDDDD|
+2025-12-11   100c  27r   99s  |........................................................|
+2025-12-12   100c   3r   16s  |..DDDDDDDDDDDDDDDDDDDDDDDDDDDAAAADAAAAAAAAAAAAAAAAAAAAAA|
+2025-12-13   100c   1r    0s  |EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE|
+2025-12-14   100c   1r    0s  |BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB|
+2025-12-15     3c   1r    0s  |...                                                     |
+2025-12-16   100c  10r   99s  |HEBAF.HGDCF.EBAC.HGBAF.EGDC.HEBAF.HGDCF.EBAC.HGBAF.EGDC.|
+2025-12-17   100c   2r    3s  |CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCFFFFFFFF|
+2025-12-18   100c   2r    5s  |AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACCCCCCC|
+2025-12-19   100c   3r   82s  |........................................................|
+2025-12-20   100c   1r    0s  |BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB|
+2025-12-21   100c   2r   47s  |CCCCCCCCCCFFFFFCCCCFFFFFCCCCCFFFFFFFFFFFFFFFFFFFFFFFFFFF|
+2025-12-22   100c   4r   99s  |........................................................|
+2025-12-23   100c   3r   99s  |CFFFFCCCCCFFFFFCCCCFFFFFCCCCCFFFFCCCCCFFFFFCCCCFC...FFFF|
+2025-12-24   100c   3r   62s  |ACCCCAAAACCCCCCCCCCCCCCCCCCCCCFFFCCCCCFFFFFCCCCFFFFFCCCC|
+2025-12-25   100c   6r   84s  |........................................................|
+2025-12-26   100c   2r   51s  |HHHHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEHHHHHEEEEEHHHHEEEEEHHHH|
+2025-12-27   100c   5r   99s  |........................................................|
+2025-12-28   100c  13r   93s  |........................................................|
+2025-12-29   100c   5r   97s  |..BADADBADADBABDCDCBABABDCDCDABABDCADCDCADCDCADADCADADCA|
+2025-12-30   100c   3r   94s  |........................................................|
+2025-12-31   100c  11r   99s  |........................................................|
+```
+
