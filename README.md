@@ -10,8 +10,9 @@ Open questions:
 - what do they do? what kind of software engineering
 - who commits 24 hour a day.
 
-"Agentic Much" paper:
-https://arxiv.org/pdf/2601.18341
+"Agentic Much":
+  - Paper: https://arxiv.org/pdf/2601.18341
+  - Code/artifacts: https://github.com/labri-progress/agent-mining
 
 ## Claude code commits
 9.6M today
