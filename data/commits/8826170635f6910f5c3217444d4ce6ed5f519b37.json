@@ -6,9 +6,9 @@
     "additions": 1,
     "deletions": 0,
     "changes": 1,
-    "blob_url": "https://github.com/danielstarman/openclaw-archive-20260222/blob/8826170635f6910f5c3217444d4ce6ed5f519b37/apps%2Fandroid%2Fapp%2Fbuild.gradle.kts",
-    "raw_url": "https://github.com/danielstarman/openclaw-archive-20260222/raw/8826170635f6910f5c3217444d4ce6ed5f519b37/apps%2Fandroid%2Fapp%2Fbuild.gradle.kts",
-    "contents_url": "https://api.github.com/repos/danielstarman/openclaw-archive-20260222/contents/apps%2Fandroid%2Fapp%2Fbuild.gradle.kts?ref=8826170635f6910f5c3217444d4ce6ed5f519b37",
+    "blob_url": "https://github.com/gidora9/openclaw-personal/blob/8826170635f6910f5c3217444d4ce6ed5f519b37/apps%2Fandroid%2Fapp%2Fbuild.gradle.kts",
+    "raw_url": "https://github.com/gidora9/openclaw-personal/raw/8826170635f6910f5c3217444d4ce6ed5f519b37/apps%2Fandroid%2Fapp%2Fbuild.gradle.kts",
+    "contents_url": "https://api.github.com/repos/gidora9/openclaw-personal/contents/apps%2Fandroid%2Fapp%2Fbuild.gradle.kts?ref=8826170635f6910f5c3217444d4ce6ed5f519b37",
     "patch": "@@ -31,6 +31,7 @@ android {\n \n   buildFeatures {\n     compose = true\n+    buildConfig = true\n   }\n \n   compileOptions {"
   },
   {
@@ -18,9 +18,9 @@
     "additions": 9,
     "deletions": 1,
     "changes": 10,
-    "blob_url": "https://github.com/danielstarman/openclaw-archive-20260222/blob/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Fcli%2Fcanvas-cli.coverage.test.ts",
-    "raw_url": "https://github.com/danielstarman/openclaw-archive-20260222/raw/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Fcli%2Fcanvas-cli.coverage.test.ts",
-    "contents_url": "https://api.github.com/repos/danielstarman/openclaw-archive-20260222/contents/src%2Fcli%2Fcanvas-cli.coverage.test.ts?ref=8826170635f6910f5c3217444d4ce6ed5f519b37",
+    "blob_url": "https://github.com/gidora9/openclaw-personal/blob/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Fcli%2Fcanvas-cli.coverage.test.ts",
+    "raw_url": "https://github.com/gidora9/openclaw-personal/raw/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Fcli%2Fcanvas-cli.coverage.test.ts",
+    "contents_url": "https://api.github.com/repos/gidora9/openclaw-personal/contents/src%2Fcli%2Fcanvas-cli.coverage.test.ts?ref=8826170635f6910f5c3217444d4ce6ed5f519b37",
     "patch": "@@ -148,7 +148,15 @@ describe(\"canvas-cli coverage\", () => {\n \n     await expect(\n       program.parseAsync(\n-        [\"canvas\", \"a2ui\", \"push\", \"--node\", \"mac-1\", \"--jsonl\", \"/tmp/a2ui.jsonl\"],\n+        [\n+          \"canvas\",\n+          \"a2ui\",\n+          \"push\",\n+          \"--node\",\n+          \"mac-1\",\n+          \"--jsonl\",\n+          \"/tmp/a2ui.jsonl\",\n+        ],\n         { from: \"user\" },\n       ),\n     ).rejects.toThrow(\"__exit__:1\");"
   },
   {
@@ -30,9 +30,9 @@
     "additions": 0,
     "deletions": 2,
     "changes": 2,
-    "blob_url": "https://github.com/danielstarman/openclaw-archive-20260222/blob/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Fconfig%2Fconfig.ts",
-    "raw_url": "https://github.com/danielstarman/openclaw-archive-20260222/raw/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Fconfig%2Fconfig.ts",
-    "contents_url": "https://api.github.com/repos/danielstarman/openclaw-archive-20260222/contents/src%2Fconfig%2Fconfig.ts?ref=8826170635f6910f5c3217444d4ce6ed5f519b37",
+    "blob_url": "https://github.com/gidora9/openclaw-personal/blob/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Fconfig%2Fconfig.ts",
+    "raw_url": "https://github.com/gidora9/openclaw-personal/raw/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Fconfig%2Fconfig.ts",
+    "contents_url": "https://api.github.com/repos/gidora9/openclaw-personal/contents/src%2Fconfig%2Fconfig.ts?ref=8826170635f6910f5c3217444d4ce6ed5f519b37",
     "patch": "@@ -868,10 +868,8 @@ function applyIdentityDefaults(cfg: ClawdisConfig): ClawdisConfig {\n   const identity = cfg.identity;\n   if (!identity) return cfg;\n \n-  const emoji = identity.emoji?.trim();\n   const name = identity.name?.trim();\n \n-  const messages = cfg.messages ?? {};\n   const routing = cfg.routing ?? {};\n   const groupChat = routing.groupChat ?? {};\n "
   },
   {
@@ -42,9 +42,9 @@
     "additions": 1,
     "deletions": 1,
     "changes": 2,
-    "blob_url": "https://github.com/danielstarman/openclaw-archive-20260222/blob/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Fgateway%2Fserver.ts",
-    "raw_url": "https://github.com/danielstarman/openclaw-archive-20260222/raw/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Fgateway%2Fserver.ts",
-    "contents_url": "https://api.github.com/repos/danielstarman/openclaw-archive-20260222/contents/src%2Fgateway%2Fserver.ts?ref=8826170635f6910f5c3217444d4ce6ed5f519b37",
+    "blob_url": "https://github.com/gidora9/openclaw-personal/blob/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Fgateway%2Fserver.ts",
+    "raw_url": "https://github.com/gidora9/openclaw-personal/raw/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Fgateway%2Fserver.ts",
+    "contents_url": "https://api.github.com/repos/gidora9/openclaw-personal/contents/src%2Fgateway%2Fserver.ts?ref=8826170635f6910f5c3217444d4ce6ed5f519b37",
     "patch": "@@ -91,8 +91,8 @@ import { getMachineDisplayName } from \"../infra/machine-name.js\";\n import {\n   approveNodePairing,\n   listNodePairing,\n-  renamePairedNode,\n   rejectNodePairing,\n+  renamePairedNode,\n   requestNodePairing,\n   verifyNodeToken,\n } from \"../infra/node-pairing.js\";"
   },
   {
@@ -54,9 +54,9 @@
     "additions": 4,
     "deletions": 1,
     "changes": 5,
-    "blob_url": "https://github.com/danielstarman/openclaw-archive-20260222/blob/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Finfra%2Fcanvas-host-url.ts",
-    "raw_url": "https://github.com/danielstarman/openclaw-archive-20260222/raw/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Finfra%2Fcanvas-host-url.ts",
-    "contents_url": "https://api.github.com/repos/danielstarman/openclaw-archive-20260222/contents/src%2Finfra%2Fcanvas-host-url.ts?ref=8826170635f6910f5c3217444d4ce6ed5f519b37",
+    "blob_url": "https://github.com/gidora9/openclaw-personal/blob/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Finfra%2Fcanvas-host-url.ts",
+    "raw_url": "https://github.com/gidora9/openclaw-personal/raw/8826170635f6910f5c3217444d4ce6ed5f519b37/src%2Finfra%2Fcanvas-host-url.ts",
+    "contents_url": "https://api.github.com/repos/gidora9/openclaw-personal/contents/src%2Finfra%2Fcanvas-host-url.ts?ref=8826170635f6910f5c3217444d4ce6ed5f519b37",
     "patch": "@@ -51,7 +51,10 @@ export function resolveCanvasHostUrl(params: CanvasHostUrlParams) {\n       : \"http\");\n \n   const override = normalizeHost(params.hostOverride, true);\n-  const requestHost = normalizeHost(parseHostHeader(params.requestHost), !!override);\n+  const requestHost = normalizeHost(\n+    parseHostHeader(params.requestHost),\n+    !!override,\n+  );\n   const localAddress = normalizeHost(\n     params.localAddress,\n     Boolean(override || requestHost),"
   }
 ]
