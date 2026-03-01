@@ -5,7 +5,7 @@ Usage:
     python script/collect-commits-per-day.py --developer steipete --month 2025-12
 
 Output:
-    data/{developer}/{YYYY-MM}/{YYYY-MM-DD}.json  — one file per day
+    data/{developer}-{YYYY-MM}.json  — one file for the whole month
 
 When a day has more than 100 commits the script picks a random page so the
 sample is not always the same 100.
@@ -135,38 +135,38 @@ def main() -> None:
 
     session = build_session(token)
 
-    out_dir = DATA_DIR / handle / month_str
-    out_dir.mkdir(parents=True, exist_ok=True)
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    out_file = DATA_DIR / f"{handle}-{month_str}.json"
 
     print(f"Collecting commits for @{handle}  {month_str}  ({num_days} days)")
 
+    result = {
+        "developer": handle,
+        "month": month_str,
+        "days": {},
+    }
     total_saved = 0
+
     for day_num in range(1, num_days + 1):
         day = date(year, month, day_num)
         day_str = day.isoformat()
-        out_file = out_dir / f"{day_str}.json"
 
         commits, total_count = fetch_day(handle, day, session)
+        total_saved += len(commits)
 
-        payload = {
-            "developer": handle,
-            "date": day_str,
+        result["days"][day_str] = {
             "total_count": total_count,
             "sampled": len(commits),
             "commits": commits,
         }
-        out_file.write_text(json.dumps(payload, indent=2) + "\n")
-        total_saved += len(commits)
 
         indicator = f"(of {total_count})" if total_count > len(commits) else ""
-        print(
-            f"  {day_str}  {len(commits):>3} commits {indicator}"
-            f"  → {out_file.relative_to(REPO_ROOT)}"
-        )
+        print(f"  {day_str}  {len(commits):>3} commits {indicator}")
 
         time.sleep(2)
 
-    print(f"\nDone. {total_saved} commits saved to {out_dir.relative_to(REPO_ROOT)}/")
+    out_file.write_text(json.dumps(result, indent=2) + "\n")
+    print(f"\nDone. {total_saved} commits saved to {out_file.relative_to(REPO_ROOT)}")
 
 
 if __name__ == "__main__":
