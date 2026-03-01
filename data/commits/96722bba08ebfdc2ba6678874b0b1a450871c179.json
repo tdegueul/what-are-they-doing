@@ -6,9 +6,9 @@
     "additions": 1,
     "deletions": 1,
     "changes": 2,
-    "blob_url": "https://github.com/sungkue/openclaw-deploy/blob/96722bba08ebfdc2ba6678874b0b1a450871c179/src%2Fmedia%2Fstore.redirect.test.ts",
-    "raw_url": "https://github.com/sungkue/openclaw-deploy/raw/96722bba08ebfdc2ba6678874b0b1a450871c179/src%2Fmedia%2Fstore.redirect.test.ts",
-    "contents_url": "https://api.github.com/repos/sungkue/openclaw-deploy/contents/src%2Fmedia%2Fstore.redirect.test.ts?ref=96722bba08ebfdc2ba6678874b0b1a450871c179",
+    "blob_url": "https://github.com/Dow08/Moltbot/blob/96722bba08ebfdc2ba6678874b0b1a450871c179/src%2Fmedia%2Fstore.redirect.test.ts",
+    "raw_url": "https://github.com/Dow08/Moltbot/raw/96722bba08ebfdc2ba6678874b0b1a450871c179/src%2Fmedia%2Fstore.redirect.test.ts",
+    "contents_url": "https://api.github.com/repos/Dow08/Moltbot/contents/src%2Fmedia%2Fstore.redirect.test.ts?ref=96722bba08ebfdc2ba6678874b0b1a450871c179",
     "patch": "@@ -31,7 +31,7 @@ describe(\"media store redirects\", () => {\n \n   it(\"follows redirects and keeps detected mime/extension\", async () => {\n     let call = 0;\n-    mockRequest.mockImplementation((url, _opts, cb) => {\n+    mockRequest.mockImplementation((_url, _opts, cb) => {\n       call += 1;\n       const res = new PassThrough();\n       const req = {"
   },
   {
@@ -18,9 +18,9 @@
     "additions": 7,
     "deletions": 1,
     "changes": 8,
-    "blob_url": "https://github.com/sungkue/openclaw-deploy/blob/96722bba08ebfdc2ba6678874b0b1a450871c179/src%2Fprocess%2Ftau-rpc.ts",
-    "raw_url": "https://github.com/sungkue/openclaw-deploy/raw/96722bba08ebfdc2ba6678874b0b1a450871c179/src%2Fprocess%2Ftau-rpc.ts",
-    "contents_url": "https://api.github.com/repos/sungkue/openclaw-deploy/contents/src%2Fprocess%2Ftau-rpc.ts?ref=96722bba08ebfdc2ba6678874b0b1a450871c179",
+    "blob_url": "https://github.com/Dow08/Moltbot/blob/96722bba08ebfdc2ba6678874b0b1a450871c179/src%2Fprocess%2Ftau-rpc.ts",
+    "raw_url": "https://github.com/Dow08/Moltbot/raw/96722bba08ebfdc2ba6678874b0b1a450871c179/src%2Fprocess%2Ftau-rpc.ts",
+    "contents_url": "https://api.github.com/repos/Dow08/Moltbot/contents/src%2Fprocess%2Ftau-rpc.ts?ref=96722bba08ebfdc2ba6678874b0b1a450871c179",
     "patch": "@@ -7,7 +7,13 @@ type TauRpcOptions = {\n   timeoutMs: number;\n };\n \n-type TauRpcResult = { stdout: string; stderr: string; code: number };\n+type TauRpcResult = {\n+  stdout: string;\n+  stderr: string;\n+  code: number;\n+  signal?: NodeJS.Signals | null;\n+  killed?: boolean;\n+};\n \n class TauRpcClient {\n   private child: ChildProcessWithoutNullStreams | null = null;"
   }
 ]
