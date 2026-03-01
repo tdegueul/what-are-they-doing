@@ -1,11 +1,48 @@
-[ {
-  "handle": "steipete",
-  "commits_per_month": {"jan-2026": 0},
-  "validated_by" : ["our name"]
-  }
+[
+  {
+    "handle": "steipete",
+    "commits_per_month": {
+      "jan-2026": 3246519,
+      "jan-2025": 0,
+      "feb-2025": 0,
+      "mar-2025": 0,
+      "apr-2025": 464,
+      "may-2025": 3214,
+      "jun-2025": 8646,
+      "jul-2025": 2885,
+      "aug-2025": 2008,
+      "sep-2025": 276,
+      "oct-2025": 82,
+      "nov-2025": 232423,
+      "dec-2025": 1631069,
+      "feb-2026": 630778,
+      "mar-2026": 0
+    },
+    "validated_by": [
+      "our name"
+    ]
+  },
   {
     "handle": "Dicklesworthstone",
-    "commits_per_month": {"jan-2026": 0},
-    "validated_by" : ["our name"]
+    "commits_per_month": {
+      "jan-2026": 17407,
+      "jan-2025": 100,
+      "feb-2025": 90,
+      "mar-2025": 111,
+      "apr-2025": 248,
+      "may-2025": 84,
+      "jun-2025": 79,
+      "jul-2025": 39,
+      "aug-2025": 108,
+      "sep-2025": 119,
+      "oct-2025": 474,
+      "nov-2025": 2030,
+      "dec-2025": 6462,
+      "feb-2026": 22055,
+      "mar-2026": 106
+    },
+    "validated_by": [
+      "our name"
+    ]
   }
 ]
