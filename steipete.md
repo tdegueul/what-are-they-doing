@@ -95,3 +95,32 @@ Total commits: 2908  |  peak hour: 00:xx UTC
   23  │████████████████████████████████████████            188
 
 ```
+
+## Conventional commit analysis
+
+```
+Conventional Commit Analysis — steipete-2025-12
+=======================================================
+  Total commits     : 2908
+  Conventional      : 2761  (95%)
+  Non-conventional  : 147
+  Breaking changes  : 1
+
+By type  (n=2761)
+─────────────────
+  fix                  ████████████████████████████████████ 32%       894
+  chore                ███████████ 12%                                340
+  feat                 █████████ 10%                                  283
+  docs                 ████████ 10%                                   269
+  test                 ████ 6%                                        163
+  mac                  ███ 5%                                         140
+  style                ███ 5%                                         130
+  refactor             █ 3%                                           79
+  macos                ██ 1%                                          37
+  ci                   ██ 1%                                          35
+  ui                   █ 1%                                           32
+  cli                  █ 1%                                           29
+  web                  █ 1%                                           28
+  gateway              █ 1%                                           28
+  webchat              █ 1%                                           26
+```
