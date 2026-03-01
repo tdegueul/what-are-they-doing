@@ -9,6 +9,7 @@ Date range: January 2025 through the current month.
 Results are written back to developers.json.
 """
 
+
 import json
 import re
 import sys
@@ -19,6 +20,12 @@ from pathlib import Path
 
 import keyring
 import requests
+
+print ("""
+       THIS DOES NOT GIVE RELIABLE DATA BECAUSE OF A BUG IN THE GITHUB API see https://github.com/orgs/community/discussions/188372
+       
+       """)
+sys.exit(-1)
 
 REPO_ROOT = Path(__file__).parent.parent
 DEVELOPERS_FILE = REPO_ROOT / "developers.json"
