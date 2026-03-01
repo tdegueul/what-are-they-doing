@@ -1,0 +1,26 @@
+[
+  {
+    "sha": "4bf619354fd096bb7021b1bac1a5850dd849c755",
+    "filename": "docs/gateway-lock.md",
+    "status": "modified",
+    "additions": 12,
+    "deletions": 12,
+    "changes": 24,
+    "blob_url": "https://github.com/CxxxxDxxxF/feb18/blob/6449a389657aab89dee0edf83599e044cc444a73/docs%2Fgateway-lock.md",
+    "raw_url": "https://github.com/CxxxxDxxxF/feb18/raw/6449a389657aab89dee0edf83599e044cc444a73/docs%2Fgateway-lock.md",
+    "contents_url": "https://api.github.com/repos/CxxxxDxxxF/feb18/contents/docs%2Fgateway-lock.md?ref=6449a389657aab89dee0edf83599e044cc444a73",
+    "patch": "@@ -1,28 +1,28 @@\n ---\n-summary: \"Gateway lock strategy using POSIX flock and PID file\"\n+summary: \"Gateway singleton guard using the WebSocket listener bind\"\n read_when:\n   - Running or debugging the gateway process\n   - Investigating single-instance enforcement\n ---\n # Gateway lock\n \n-Last updated: 2025-12-10\n+Last updated: 2025-12-11\n \n ## Why\n - Ensure only one gateway instance runs per host.\n-- Survive crashes/SIGKILL without leaving a blocking stale lock.\n-- Keep the PID visible for observability and manual debugging.\n+- Survive crashes/SIGKILL without leaving stale lock files.\n+- Fail fast with a clear error when the control port is already occupied.\n \n ## Mechanism\n-- Uses a single lock file (default `${os.tmpdir()}/clawdis-gateway.lock`, e.g. `/var/folders/.../clawdis-gateway.lock` on macOS) opened once per process.\n-- An exclusive, non-blocking POSIX `flock` is taken on the file descriptor. The kernel releases the lock automatically on any process exit, including crashes and SIGKILL.\n-- The PID is written into the same file after locking; the lock (not file existence) is the source of truth.\n-- On graceful shutdown, we best-effort unlock, close, and unlink the file to reduce crumbs, but correctness does not rely on cleanup.\n+- The gateway binds the WebSocket listener (default `ws://127.0.0.1:18789`) immediately on startup using an exclusive TCP listener.\n+- If the bind fails with `EADDRINUSE`, startup throws `GatewayLockError(\"another gateway instance is already listening on ws://127.0.0.1:<port>\")`.\n+- The OS releases the listener automatically on any process exit, including crashes and SIGKILL\u2014no separate lock file or cleanup step is needed.\n+- On shutdown the gateway closes the WebSocket server and underlying HTTP server to free the port promptly.\n \n ## Error surface\n-- If another instance holds the lock, startup throws `GatewayLockError(\"another gateway instance is already running\")`.\n-- Unexpected `flock` failures surface as `GatewayLockError(\"failed to acquire gateway lock: \u2026\")`.\n+- If another process holds the port, startup throws `GatewayLockError(\"another gateway instance is already listening on ws://127.0.0.1:<port>\")`.\n+- Other bind failures surface as `GatewayLockError(\"failed to bind gateway socket on ws://127.0.0.1:<port>: \u2026\")`.\n \n ## Operational notes\n-- The lock file may remain on disk after abnormal exits; this is expected and harmless because the kernel lock is gone.\n-- If you need to inspect, `cat /tmp/clawdis-gateway.lock` shows the last PID. Do not delete the file while a process is running\u2014you would only remove the convenience marker, not the lock itself.\n+- If the port is occupied by *another* process, the error is the same; free the port or choose another with `clawdis gateway --port <port>`.\n+- The macOS app still maintains its own lightweight PID guard before spawning the gateway; the runtime lock is enforced by the WebSocket bind."
+  },
+  {
+    "sha": "c1f85b536357a682bc02abb25fd15e5b84e2fad5",
+    "filename": "docs/test.md",
+    "status": "modified",
+    "additions": 1,
+    "deletions": 1,
+    "changes": 2,
+    "blob_url": "https://github.com/CxxxxDxxxF/feb18/blob/6449a389657aab89dee0edf83599e044cc444a73/docs%2Ftest.md",
+    "raw_url": "https://github.com/CxxxxDxxxF/feb18/raw/6449a389657aab89dee0edf83599e044cc444a73/docs%2Ftest.md",
+    "contents_url": "https://api.github.com/repos/CxxxxDxxxF/feb18/contents/docs%2Ftest.md?ref=6449a389657aab89dee0edf83599e044cc444a73",
+    "patch": "@@ -1,4 +1,4 @@\n ## Tests\n \n-- `pnpm test:force`: Kills any lingering gateway process holding the default lock/port, removes stale lock files, runs the full Vitest suite with an isolated temporary gateway lock path so gateway server tests don\u2019t collide with a running instance. Use this when a prior gateway run left `/tmp/clawdis-gateway.lock` or port 18789 occupied.\n+- `pnpm test:force`: Kills any lingering gateway process holding the default control port, then runs the full Vitest suite with an isolated gateway port so server tests don\u2019t collide with a running instance. Use this when a prior gateway run left port 18789 occupied.\n - `pnpm test:coverage`: Runs Vitest with V8 coverage. Global thresholds are 70% lines/functions/statements and 55% branches. Coverage excludes integration-heavy entrypoints (CLI wiring, gateway/telegram bridges, webchat static server) to keep the target focused on unit-testable logic."
+  }
+]
