@@ -46,13 +46,15 @@ def match_files(heuristics_list, changed_filenames: list[str]) -> bool:
 def detect_agents(
     commit_item: dict,
     all_heuristics: dict[str, list],
-    changed_files: list[dict],
+    detail: dict,
 ) -> list[str]:
     """Return list of agent names that match this commit."""
-    msg = commit_item.get("commit", {}).get("message", "")
+    # Prefer the full message from the detail cache — the search API truncates
+    # the body, which cuts off Co-Authored-By trailers.
+    msg = detail.get("message") or commit_item.get("commit", {}).get("message", "")
     author = commit_item.get("commit", {}).get("author", {})
     commit_author = f"{author.get('name', '')} <{author.get('email', '')}>"
-    filenames = [f["filename"] for f in changed_files]
+    filenames = [f["filename"] for f in detail.get("files", [])]
 
     matched = []
     for agent_name, heuristics_list in all_heuristics.items():
@@ -123,19 +125,22 @@ def main() -> None:
     n = len(commits)
 
     cached = sum(1 for c in commits if (COMMITS_DIR / f"{c.get('sha','')}.json").exists())
-    print(f"Commits: {n}  |  with file cache: {cached}  |  agents loaded: {len(all_heuristics)}")
+    full_msg = sum(1 for c in commits
+                   if load_cached_detail(c.get("sha","")).get("message"))
+    print(f"Commits: {n}  |  cached: {cached}  |  full message: {full_msg}  |  agents: {len(all_heuristics)}")
+    if full_msg < n:
+        print(f"  tip: run analyze-commit-quality.py first to fetch full messages", file=sys.stderr)
 
     # Per-commit detection
-    agent_hits: Counter = Counter()           # agent → commit count
-    signal_hits: Counter = Counter()          # message vs file signal
+    agent_hits: Counter = Counter()
     examples: dict[str, list[str]] = defaultdict(list)
-    agent_commit_count: Counter = Counter()   # how many commits matched ≥1 agent
+    agent_commit_count: Counter = Counter()
     multi_agent_commits = 0
 
     for commit in commits:
         sha = commit.get("sha", "")
-        changed_files = load_cached_files(sha)
-        matched = detect_agents(commit, all_heuristics, changed_files)
+        detail = load_cached_detail(sha)
+        matched = detect_agents(commit, all_heuristics, detail)
 
         if len(matched) > 1:
             multi_agent_commits += 1
