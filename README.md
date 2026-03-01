@@ -33,10 +33,6 @@ We use https://github.com/labri-progress/agent-mining as submodule
 
 - Xu et al. (2025). *code_transformed: The Influence of Large Language Models on Code.* arXiv:2506.12014. Large-scale study of 20,000+ GitHub repos showing measurable shifts in coding style (e.g., snake_case usage) attributable to LLM influence.
 
-- Caldeira et al. (2021). *Profiling Software Developers with Process Mining and N-Gram Language Models.* arXiv:2101.06733. Profiles developers by mining IDE events and commit activity; related to our goal of characterizing developer behavior from repository data.
-
-- Wen et al. (2021). *Quick remedy commits and their impact on mining software repositories.* EMSE 27. Taxonomy of commits that quickly follow and fix a previous commit; relevant for interpreting dense commit streams from AI-assisted developers.
-
 ## By products
 
 - We found a bug in the Github search API (includes fork by default, no way to exclude): <https://github.com/orgs/community/discussions/188372>
