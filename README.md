@@ -1,5 +1,14 @@
 # what-are-they-doing
-What are they doing?!
+
+we are consolidating:
+- dataset of 10 AI-crazy developers 
+- dataset of 10 AI-crazy projects (with at least 2 AI-crazy developers )
+- dataset of AI generated commits
+
+Open questions:
+
+- what do they do? what kind of software engineering
+- who commits 24 hour a day.
 
 "Agentic Much" paper:
 https://arxiv.org/pdf/2601.18341
