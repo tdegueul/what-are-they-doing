@@ -1,5 +1,9 @@
 # Analysis of @steipete
 
+This developer is the main contributor of clawbot/openclaw.
+
+## Commits per month
+
 ```
 steipete
   jan-2025: 0
