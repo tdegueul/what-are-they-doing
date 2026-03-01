@@ -17,3 +17,7 @@ Open questions:
 ## Claude code commits
 9.6M today
 https://github.com/search?q=%22noreply%40anthropic.com%22&type=commits
+
+## Architectue
+
+We use https://github.com/labri-progress/agent-mining as submodule
