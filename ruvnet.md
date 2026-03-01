@@ -5,22 +5,24 @@
 ## Commits per month
 
 ```
-ruvnet
-  jan-2025: 119
-  feb-2025: 139
-  mar-2025: 219
-  apr-2025: 70
-  may-2025: 179
-  jun-2025: 1835
-  jul-2025: 4473
-  aug-2025: 31121
-  sep-2025: 3689
-  oct-2025: 1171
-  nov-2025: 1174
-  dec-2025: 1230
-  jan-2026: 6539
-  feb-2026: 1373
-  mar-2026: 31
+Developer: @ruvnet
+  Warning: commit search failed (HTTP 422).
+  11 owned non-fork repo(s) found
+  jan-2025: 0
+  feb-2025: 0
+  mar-2025: 0
+  apr-2025: 0
+  may-2025: 0
+  jun-2025: 276  (ruvnet/ruflo:69, while-basic/c-flow:69, EarthmanWeb/claude-flow-plugin:69, CreekBar/claude-flow:69)
+  jul-2025: 1016  (ruvnet/ruflo:254, while-basic/c-flow:254, EarthmanWeb/claude-flow-plugin:254, CreekBar/claude-flow:254)
+  aug-2025: 9152  (ruvnet/ruflo:2288, while-basic/c-flow:2288, EarthmanWeb/claude-flow-plugin:2288, CreekBar/claude-flow:2288)
+  sep-2025: 1256  (ruvnet/ruflo:314, while-basic/c-flow:314, EarthmanWeb/claude-flow-plugin:314, CreekBar/claude-flow:314)
+  oct-2025: 629  (ruvnet/agentic-flow:156, ruvnet/ruflo:87, URF365LLC/SELF-AI:125, while-basic/c-flow:87, EarthmanWeb/claude-flow-plugin:87, CreekBar/claude-flow:87)
+  nov-2025: 967  (ruvnet/agentic-flow:270, subnirvake/vector-sh:206, ruvnet/ruflo:35, agenticsorg/hackathon-tv5:5, URF365LLC/SELF-AI:135, while-basic/c-flow:35, EarthmanWeb/claude-flow-plugin:35, CreekBar/claude-flow:35, nolandubeau/hackathon-tv5:5, ruvnet/ruvector:206)
+  dec-2025: 1216  (ruvnet/agentic-flow:140, subnirvake/vector-sh:483, ruvnet/ruflo:7, agenticsorg/hackathon-tv5:8, URF365LLC/SELF-AI:70, while-basic/c-flow:7, EarthmanWeb/claude-flow-plugin:7, CreekBar/claude-flow:7, nolandubeau/hackathon-tv5:4, ruvnet/ruvector:483)
+  jan-2026: 6492  (ruvnet/agentic-flow:74, subnirvake/vector-sh:118, ruvnet/ruflo:2082, URF365LLC/SELF-AI:11, EarthmanWeb/claude-flow-plugin:2007, CreekBar/claude-flow:2082, ruvnet/ruvector:118)
+  feb-2026: 1341  (ruvnet/agentic-flow:64, subnirvake/vector-sh:289, ruvnet/ruflo:699, ruvnet/ruvector:289)
+  mar-2026: 0
 ```
 
 ## Top-10 repositories for @ruvnet — December 2025

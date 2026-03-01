@@ -1,71 +1,44 @@
 [
   {
     "handle": "steipete",
-    "commits_per_month": {
-      "jan-2026": 3246519,
-      "jan-2025": 0,
-      "feb-2025": 0,
-      "mar-2025": 0,
-      "apr-2025": 464,
-      "may-2025": 3214,
-      "jun-2025": 8646,
-      "jul-2025": 2885,
-      "aug-2025": 2008,
-      "sep-2025": 276,
-      "oct-2025": 82,
-      "nov-2025": 232423,
-      "dec-2025": 1631069,
-      "feb-2026": 630778,
-      "mar-2026": 0
-    },
     "validated_by": [
       "our name"
+    ],
+    "repos": [
+      "jiangshaojie2020/clawdbot"
     ]
   },
   {
     "handle": "Dicklesworthstone",
-    "commits_per_month": {
-      "jan-2026": 17407,
-      "jan-2025": 100,
-      "feb-2025": 90,
-      "mar-2025": 111,
-      "apr-2025": 248,
-      "may-2025": 84,
-      "jun-2025": 79,
-      "jul-2025": 39,
-      "aug-2025": 108,
-      "sep-2025": 119,
-      "oct-2025": 474,
-      "nov-2025": 2030,
-      "dec-2025": 6462,
-      "feb-2026": 22055,
-      "mar-2026": 106
-    },
     "validated_by": [
       "our name"
+    ],
+    "repos": [
+      "Dicklesworthstone/ntm",
+      "Dicklesworthstone/chat_shared_conversation_to_file",
+      "Dicklesworthstone/source_to_prompt_tui",
+      "dahisea/All-Repo-Trending",
+      "Dicklesworthstone/markdown_web_browser",
+      "Dicklesworthstone/slb"
     ]
   },
   {
     "handle": "ruvnet",
-    "commits_per_month": {
-      "jan-2026": 6539,
-      "jan-2025": 119,
-      "feb-2025": 139,
-      "mar-2025": 219,
-      "apr-2025": 70,
-      "may-2025": 179,
-      "jun-2025": 1835,
-      "jul-2025": 4473,
-      "aug-2025": 31121,
-      "sep-2025": 3689,
-      "oct-2025": 1171,
-      "nov-2025": 1174,
-      "dec-2025": 1230,
-      "feb-2026": 1373,
-      "mar-2026": 31
-    },
     "validated_by": [
       "our name"
+    ],
+    "repos": [
+      "dahisea/All-Repo-Trending",
+      "ruvnet/agentic-flow",
+      "subnirvake/vector-sh",
+      "ruvnet/ruflo",
+      "agenticsorg/hackathon-tv5",
+      "URF365LLC/SELF-AI",
+      "while-basic/c-flow",
+      "EarthmanWeb/claude-flow-plugin",
+      "CreekBar/claude-flow",
+      "nolandubeau/hackathon-tv5",
+      "ruvnet/ruvector"
     ]
   }
 ]

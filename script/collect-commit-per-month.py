@@ -201,6 +201,49 @@ def count_commits_in_repo(
     return count
 
 
+def get_repos_committed_in_december(handle: str, session: requests.Session) -> list[str]:
+    """Return full_names of repos where *handle* has commits in December 2025 using commit search API."""
+    december_repos: list[str] = []
+    page = 1
+
+    # Search for commits by handle in December 2025
+    while True:
+        resp = _get_with_retry(
+            session,
+            "https://api.github.com/search/commits",
+            params={
+                "q": f"author:{handle} committer-date:2025-12-01..2025-12-31",
+                "per_page": 100,
+                "page": page,
+            },
+        )
+
+        if resp.status_code != 200:
+            print(
+                f"  Warning: commit search failed (HTTP {resp.status_code}).",
+                file=sys.stderr,
+            )
+            break
+
+        data = resp.json()
+        items = data.get("items", [])
+        if not items:
+            break
+
+        # Extract unique repo full_names
+        for commit in items:
+            repo_name = commit.get("repository", {}).get("full_name")
+            if repo_name and repo_name not in december_repos:
+                december_repos.append(repo_name)
+
+        if len(items) < 100:
+            break  # last page
+        page += 1
+        time.sleep(INTER_REQUEST_SLEEP)
+
+    return december_repos
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -234,7 +277,7 @@ def main() -> None:
         print(f"Developer: @{handle}")
 
         # Step 1 — discover non-fork owned repos
-        repos = get_owned_nonfork_repos(handle, session)
+        repos = get_repos_committed_in_december(handle, session)
         print(f"  {len(repos)} owned non-fork repo(s) found")
         dev["repos"] = repos  # store for transparency / debugging
         time.sleep(INTER_REQUEST_SLEEP)
@@ -259,7 +302,6 @@ def main() -> None:
             detail = f"  ({', '.join(repo_hits)})" if repo_hits else ""
             print(f"  {key}: {monthly_total}{detail}")
 
-    DEVELOPERS_FILE.write_text(json.dumps(developers, indent=2) + "\n")
     print("\nDone. developers.json updated.")
 
 

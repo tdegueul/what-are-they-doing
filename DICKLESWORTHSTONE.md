@@ -8,6 +8,29 @@
   - Many `.md` files tracking plans, current progress, etc.
   - Wtf is this sh*t? https://github.com/Dicklesworthstone/pi_agent_rust/blob/main/.github/workflows/ci.yml
 
+```
+Developer: @Dicklesworthstone
+  Warning: commit search failed (HTTP 422).
+  6 owned non-fork repo(s) found
+  jan-2025: 0
+  feb-2025: 0
+  mar-2025: 0
+  apr-2025: 0
+  may-2025: 0
+  jun-2025: 0
+  jul-2025: 0
+  aug-2025: 0
+  sep-2025: 0
+  oct-2025: 0
+  nov-2025: 92  (Dicklesworthstone/markdown_web_browser:92)
+  dec-2025: 990  (Dicklesworthstone/ntm:637, Dicklesworthstone/chat_shared_conversation_to_file:63, Dicklesworthstone/source_to_prompt_tui:18, Dicklesworthstone/markdown_web_browser:1, Dicklesworthstone/slb:271)
+  jan-2026: 1091  (Dicklesworthstone/ntm:1002, Dicklesworthstone/chat_shared_conversation_to_file:11, Dicklesworthstone/source_to_prompt_tui:14, Dicklesworthstone/markdown_web_browser:22, Dicklesworthstone/slb:42)
+  feb-2026: 655  (Dicklesworthstone/ntm:618, Dicklesworthstone/chat_shared_conversation_to_file:3, Dicklesworthstone/source_to_prompt_tui:8, Dicklesworthstone/markdown_web_browser:17, Dicklesworthstone/slb:9)
+  mar-2026: 0
+
+
+```
+
 # Commits
   - Mostly co-authored by Claude code
   - Mostly using conventional commits
