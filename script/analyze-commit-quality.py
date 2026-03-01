@@ -218,7 +218,7 @@ def print_flag_table(
     max_c = max(counts.values(), default=1)
 
     print(f"\n  {'Flag':<22} {'Bar':<{BAR_WIDTH + 6}} {'n':>5}  {'%':>5}")
-    print(f"  {'─'*22} {'─'*{BAR_WIDTH + 6}} {'─'*5}  {'─'*5}")
+    print(f"  {'─'*22} {'─'*(BAR_WIDTH + 6)} {'─'*5}  {'─'*5}")
 
     print("  ── good ──")
     for f in good_flags:

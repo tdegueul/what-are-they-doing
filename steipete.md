@@ -172,3 +172,39 @@ https://github.com/Dicklesworthstone/pi_agent_rust/blob/main/.github/workflows/c
 2025-12-31   100c  11r   99s  |........................................................|
 ```
 
+
+## Commit quality
+
+```
+All 2908 commits already cached in data/commits/
+
+Commit Quality Analysis — steipete-2025-12
+=======================================================
+  Commits analysed : 2908
+  Avg files/commit : 4.7
+  Avg lines/commit : 290.3
+
+  Flag                   Bar                                                n      %
+  ────────────────────── ────────────────────────────────────────────── ─────  ─────
+  ── good ──
+  fix_with_test          ██ 9%                                            273     9%
+  focused                ████████████████████████████████████ 81%        2341    81%
+  pure_concern           ███████████████████████████ 62%                 1790    62%
+  ── dirty ──
+  fix_no_test            ███████ 21%                                      621    21%
+  feat_no_test           ██ 5%                                            142     5%
+  scattered               0%                                               14     0%
+  huge_diff              █ 8%                                             237     8%
+  mixed_concerns         ██ 12%                                           340    12%
+
+File type breakdown  (n=2908)
+─────────────────────────────
+    source               ████████████████████████████████████ 57%        7741
+    other                ███████ 15%                                     2050
+    docs                 █████ 13%                                       1793
+    test                 █████ 12%                                       1688
+    config               █ 2%                                             279
+    generated             0%                                               38
+    ci                    0%                                               32
+
+```
