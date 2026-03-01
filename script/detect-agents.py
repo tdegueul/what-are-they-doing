@@ -77,11 +77,17 @@ def load_commits(path: Path) -> list[dict]:
     return commits
 
 
-def load_cached_files(sha: str) -> list[dict]:
+def load_cached_detail(sha: str) -> dict:
+    """Return {"message": str, "files": list}.
+    Handles both the new dict format and the old bare-list format.
+    """
     p = COMMITS_DIR / f"{sha}.json"
-    if p.exists():
-        return json.loads(p.read_text())
-    return []
+    if not p.exists():
+        return {"message": "", "files": []}
+    raw = json.loads(p.read_text())
+    if isinstance(raw, list):          # old format: bare files array
+        return {"message": "", "files": raw}
+    return raw
 
 
 # ── Display ───────────────────────────────────────────────────────────────────

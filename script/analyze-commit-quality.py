@@ -103,9 +103,10 @@ def build_session(token: str) -> requests.Session:
     return s
 
 
-def fetch_commit_files(
+def fetch_commit_detail(
     repo: str, sha: str, session: requests.Session
-) -> list[dict]:
+) -> dict:
+    """Return {"message": str, "files": list} from the commit detail API."""
     url = f"https://api.github.com/repos/{repo}/commits/{sha}"
     while True:
         resp = session.get(url)
@@ -116,9 +117,13 @@ def fetch_commit_files(
             time.sleep(wait)
             continue
         if resp.status_code == 404:
-            return []          # private repo or deleted
+            return {"message": "", "files": []}   # private repo or deleted
         resp.raise_for_status()
-        return resp.json().get("files", [])
+        data = resp.json()
+        return {
+            "message": data.get("commit", {}).get("message", ""),
+            "files": data.get("files", []),
+        }
 
 
 # ── Quality heuristics ────────────────────────────────────────────────────────
@@ -238,16 +243,22 @@ def commit_cache_path(sha: str) -> Path:
     return COMMITS_DIR / f"{sha}.json"
 
 
-def load_cached_files(sha: str) -> list[dict] | None:
+def load_cached_detail(sha: str) -> dict | None:
+    """Return {"message": str, "files": list} or None if not cached.
+    Also handles the old format where the file contained only a files list.
+    """
     p = commit_cache_path(sha)
-    if p.exists():
-        return json.loads(p.read_text())
-    return None
+    if not p.exists():
+        return None
+    raw = json.loads(p.read_text())
+    if isinstance(raw, list):          # old format: bare files array
+        return {"message": "", "files": raw}
+    return raw                         # new format: {message, files}
 
 
-def save_cached_files(sha: str, files: list[dict]) -> None:
+def save_cached_detail(sha: str, detail: dict) -> None:
     COMMITS_DIR.mkdir(parents=True, exist_ok=True)
-    commit_cache_path(sha).write_text(json.dumps(files, indent=2) + "\n")
+    commit_cache_path(sha).write_text(json.dumps(detail, indent=2) + "\n")
 
 
 # ── Main ─────────────────────────────────────────────────────────────────────
@@ -271,7 +282,7 @@ def main() -> None:
         sys.exit(1)
 
     commits = load_commits(path)
-    uncached = [c for c in commits if load_cached_files(c.get("sha", "")) is None]
+    uncached = [c for c in commits if load_cached_detail(c.get("sha", "")) is None]
 
     if uncached:
         token = keyring.get_password("login2", "github_token")
@@ -279,12 +290,12 @@ def main() -> None:
             sys.exit("No GitHub token in keyring (service='login2', username='github_token')")
         session = build_session(token)
 
-        print(f"Fetching file details for {len(uncached)} commits …", file=sys.stderr)
+        print(f"Fetching details for {len(uncached)} commits …", file=sys.stderr)
         for i, commit in enumerate(uncached, 1):
             sha = commit.get("sha", "")
             repo = commit.get("repository", {}).get("full_name", "")
-            files = fetch_commit_files(repo, sha, session)
-            save_cached_files(sha, files)
+            detail = fetch_commit_detail(repo, sha, session)
+            save_cached_detail(sha, detail)
             print(f"  [{i}/{len(uncached)}] {sha[:7]}  {repo}", file=sys.stderr)
             time.sleep(0.5)
     else:
@@ -294,8 +305,8 @@ def main() -> None:
     results = []
     for commit in commits:
         sha = commit.get("sha", "")
-        files = load_cached_files(sha) or []
-        results.append(analyse_commit(commit, files))
+        detail = load_cached_detail(sha) or {"message": "", "files": []}
+        results.append(analyse_commit(commit, detail["files"]))
 
     n = len(results)
     good_flags  = ["fix_with_test", "focused", "pure_concern"]

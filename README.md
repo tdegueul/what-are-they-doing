@@ -21,3 +21,8 @@ https://github.com/search?q=%22noreply%40anthropic.com%22&type=commits
 ## Architectue
 
 We use https://github.com/labri-progress/agent-mining as submodule
+
+
+## By products
+
+We found a bug in the Github search API (includes fork by default, no way to exclude): <https://github.com/orgs/community/discussions/188372>
