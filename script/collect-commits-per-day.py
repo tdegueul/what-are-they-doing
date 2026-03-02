@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Collect up to 100 commits per day for a developer in a given month.
+"""Collect commits per day for a developer in a given month.
+
+Repos are discovered via the GitHub contributionsCollection GraphQL API
+(same source as list_repos_by_user_with_events.py), so private repos are
+included when the token has access.
 
 Usage:
     python script/collect-commits-per-day.py --developer steipete --month 2025-12
 
 Output:
     data/{developer}-{YYYY-MM}.json  — one file for the whole month
-
-When a day has more than 100 commits the script picks a random page so the
-sample is not always the same 100.
 
 Token is retrieved from the system keyring:
   service  = "login2"
@@ -17,11 +18,10 @@ Token is retrieved from the system keyring:
 
 import argparse
 import json
-import random
 import sys
 import time
 from calendar import monthrange
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import keyring
@@ -30,9 +30,24 @@ import requests
 REPO_ROOT = Path(__file__).parent.parent
 DATA_DIR = REPO_ROOT / "data"
 
-# GitHub search API hard cap: 10 pages × 100 = 1 000 results
-MAX_SEARCH_RESULTS = 1000
 PER_PAGE = 100
+
+GRAPHQL_QUERY = """
+query($login: String!, $from: DateTime!, $to: DateTime!) {
+  user(login: $login) {
+    contributionsCollection(from: $from, to: $to) {
+      commitContributionsByRepository(maxRepositories: 100) {
+        repository {
+          nameWithOwner
+        }
+        contributions {
+          totalCount
+        }
+      }
+    }
+  }
+}
+"""
 
 
 def build_session(token: str) -> requests.Session:
@@ -40,7 +55,7 @@ def build_session(token: str) -> requests.Session:
     s.headers.update(
         {
             "Authorization": f"Bearer {token}",
-            "Accept": "application/vnd.github.cloak-preview+json",
+            "Accept": "application/vnd.github+json",
             "X-GitHub-Api-Version": "2022-11-28",
         }
     )
@@ -63,35 +78,59 @@ def get_with_retry(session: requests.Session, url: str, params: dict) -> dict:
         return resp.json()
 
 
-def fetch_day(
-    handle: str, day: date, session: requests.Session
-) -> tuple[list[dict], int]:
-    """Return (commits, total_count) for a single day.
+def fetch_repos_for_month(
+    session: requests.Session, handle: str, year: int, month: int, num_days: int
+) -> list[str]:
+    """Return list of repo nameWithOwner strings the user contributed to in the given month."""
+    from_dt = datetime(year, month, 1, tzinfo=timezone.utc)
+    to_dt = datetime(year, month, num_days, 23, 59, 59, tzinfo=timezone.utc)
 
-    If total_count > PER_PAGE a random page within the reachable range is used
-    so repeated runs yield different samples.
-    """
-    date_str = day.isoformat()
-    query = f"author:{handle} committer-date:{date_str}..{date_str}"
-    url = "https://api.github.com/search/commits"
-
-    # First request: discover total_count, collect page 1
-    data = get_with_retry(
-        session, url, {"q": query, "per_page": PER_PAGE, "page": 1}
+    resp = session.post(
+        "https://api.github.com/graphql",
+        json={
+            "query": GRAPHQL_QUERY,
+            "variables": {
+                "login": handle,
+                "from": from_dt.isoformat(),
+                "to": to_dt.isoformat(),
+            },
+        },
     )
-    total = data.get("total_count", 0)
-    items = data.get("items", [])
+    resp.raise_for_status()
+    data = resp.json()
 
-    if total > PER_PAGE:
-        max_page = min(total, MAX_SEARCH_RESULTS) // PER_PAGE
-        page = random.randint(1, max_page)
-        if page > 1:
-            data = get_with_retry(
-                session, url, {"q": query, "per_page": PER_PAGE, "page": page}
-            )
-            items = data.get("items", [])
+    if "errors" in data:
+        raise RuntimeError(f"GraphQL errors: {data['errors']}")
 
-    return items, total
+    contributions = (
+        data["data"]["user"]["contributionsCollection"]["commitContributionsByRepository"]
+    )
+    return [entry["repository"]["nameWithOwner"] for entry in contributions]
+
+
+def fetch_commits_for_repo_day(
+    session: requests.Session, repo: str, handle: str, day: date
+) -> list[dict]:
+    """Fetch all commits by handle in repo on a single day."""
+    since = f"{day.isoformat()}T00:00:00Z"
+    until = f"{(day + timedelta(days=1)).isoformat()}T00:00:00Z"
+    url = f"https://api.github.com/repos/{repo}/commits"
+
+    commits = []
+    page = 1
+    while True:
+        items = get_with_retry(
+            session,
+            url,
+            {"author": handle, "since": since, "until": until, "per_page": PER_PAGE, "page": page},
+        )
+        if not items:
+            break
+        commits.extend(items)
+        if len(items) < PER_PAGE:
+            break
+        page += 1
+    return commits
 
 
 def parse_month(value: str) -> tuple[int, int]:
@@ -109,7 +148,7 @@ def parse_month(value: str) -> tuple[int, int]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Collect up to 100 commits per day for a GitHub developer."
+        description="Collect commits per day for a GitHub developer."
     )
     parser.add_argument("--developer", required=True, help="GitHub handle")
     parser.add_argument(
@@ -134,36 +173,44 @@ def main() -> None:
         )
 
     session = build_session(token)
-
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     out_file = DATA_DIR / f"{handle}-{month_str}.json"
 
     print(f"Collecting commits for @{handle}  {month_str}  ({num_days} days)")
 
+    # Step 1: discover repos from contributions API
+    print("Fetching repo list from contributionsCollection …")
+    repos = fetch_repos_for_month(session, handle, year, month, num_days)
+    print(f"  {len(repos)} repo(s): {', '.join(repos)}")
+
     result = {
         "developer": handle,
         "month": month_str,
+        "repos": repos,
         "days": {},
     }
     total_saved = 0
 
+    # Step 2: for each day, collect commits across all repos
     for day_num in range(1, num_days + 1):
         day = date(year, month, day_num)
         day_str = day.isoformat()
 
-        commits, total_count = fetch_day(handle, day, session)
-        total_saved += len(commits)
+        all_commits = []
+        for repo in repos:
+            commits = fetch_commits_for_repo_day(session, repo, handle, day)
+            all_commits.extend(commits)
+            if commits:
+                time.sleep(0.5)
 
+        total_saved += len(all_commits)
         result["days"][day_str] = {
-            "total_count": total_count,
-            "sampled": len(commits),
-            "commits": commits,
+            "total_count": len(all_commits),
+            "sampled": len(all_commits),
+            "commits": all_commits,
         }
-
-        indicator = f"(of {total_count})" if total_count > len(commits) else ""
-        print(f"  {day_str}  {len(commits):>3} commits {indicator}")
-
-        time.sleep(2)
+        print(f"  {day_str}  {len(all_commits):>3} commits")
+        time.sleep(1)
 
     out_file.write_text(json.dumps(result, indent=2) + "\n")
     print(f"\nDone. {total_saved} commits saved to {out_file.relative_to(REPO_ROOT)}")
