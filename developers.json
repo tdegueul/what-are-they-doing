@@ -234,5 +234,13 @@
       "nekomeowww/ollama-operator",
       "nekomeowww/lobe-chat-renovate"
     ]
+  },
+  {
+    "handle": "Kitenite",
+    "repos": [
+      "superset-sh/superset",
+      "mastra-ai/mastra",
+      "superset-sh/homebrew-superset"
+    ]
   }
 ]
