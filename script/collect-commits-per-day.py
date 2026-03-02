@@ -152,6 +152,10 @@ def main() -> None:
             num_days = monthrange(year, month)[1]
             out_file = DATA_DIR / f"{handle}-{month_str}.json"
 
+            if out_file.exists():
+                print(f"Skipping @{handle}  {month_str}  (file already exists: {out_file.relative_to(REPO_ROOT)})")
+                continue
+
             print(f"Collecting commits for @{handle}  {month_str}  ({num_days} days)")
             print(f"  {len(repos)} repo(s) from developers.json: {', '.join(repos)}")
 
