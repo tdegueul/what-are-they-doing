@@ -80,3 +80,11 @@ We use https://github.com/labri-progress/agent-mining as submodule
 
 - We found a bug in the Github search API (includes fork by default, no way to exclude): <https://github.com/orgs/community/discussions/188372>
 - Bug and fix in agent-mining <https://github.com/labri-progress/agent-mining/pull/1>
+
+# Protocol Sketch
+
+1. Select unexplored hyper-active developer [from Gitista](https://gitista.com/).
+
+2. Document the repositories where they commit in x.
+
+3. Collect their commits.
