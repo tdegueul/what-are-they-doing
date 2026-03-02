@@ -242,5 +242,46 @@
       "mastra-ai/mastra",
       "superset-sh/homebrew-superset"
     ]
+  },
+  {
+    "handle": "obra",
+    "repos": [
+      "prime-radiant-inc/serf",
+      "prime-radiant-inc/stockyard",
+      "prime-radiant-inc/sprout",
+      "obra/wordiest",
+      "obra/winby",
+      "prime-radiant-inc/llm-proxy",
+      "prime-radiant-inc/claude-session-viewer",
+      "obra/superpowers",
+      "prime-radiant-inc/engineering-notebook",
+      "obra/moltipass",
+      "prime-radiant-inc/beeper-message-sync",
+      "obra/superpowers-marketplace",
+      "obra/superpowers-chrome",
+      "obra/wayback-restorer",
+      "prime-radiant-inc/claude-plugin-cxdb-integration",
+      "obra/streamlinear",
+      "obra/external-subagents",
+      "blaine/fantastty",
+      "obra/smallest-agent",
+      "obra/cc-plugin-decision-log",
+      "obra/iMessagePrinter",
+      "obra/episodic-memory",
+      "obra/claude-session-driver",
+      "obra/double-shot-latte",
+      "obra/github-triage",
+      "obra/superpowers-lab",
+      "obra/packnplay",
+      "obra/superpowers-developing-for-claude-code",
+      "obra/amplifier-module-hooks-concise-display",
+      "obra/dayflow-export",
+      "prime-radiant-inc/homebrew-tap",
+      "obra/amplifier-frontend-ent",
+      "crosspoint-reader/crosspoint-reader",
+      "obra/dotfiles",
+      "microsoft/amplifier",
+      "obra/comic-ocr"
+    ]
   }
 ]
