@@ -1,17 +1,17 @@
 """
-Fetch all repos where @steipete committed in the last 3 months
-using GitHub GraphQL contributionsCollection API.
+Fetch all repos where a developer committed in the last 3 months
+using GitHub GraphQL contributionsCollection API, then update developers.json.
 """
 
-import os
+import argparse
 import json
+import os
 import requests
 from datetime import datetime, timezone, timedelta
 import keyring
 
 
 GITHUB_TOKEN = keyring.get_password("login2", "github_token")
-USERNAME = "steipete"
 
 if not GITHUB_TOKEN:
     raise EnvironmentError("Set GITHUB_TOKEN environment variable")
@@ -64,11 +64,10 @@ def fetch_repos(username: str, from_dt: datetime, to_dt: datetime) -> list[dict]
 
 
 def collect_all_repos(username: str) -> dict:
+    """Fetch all repos and return as a dict keyed by repo name."""
     to_dt = datetime.now(timezone.utc)
     from_dt = to_dt - timedelta(days=90)
 
-
-    """Fetch all repos and return as a dict keyed by repo name."""
     repos = fetch_repos(username, from_dt, to_dt)
     repos.sort(key=lambda r: r["contributions"]["totalCount"], reverse=True)
     
@@ -84,12 +83,36 @@ def collect_all_repos(username: str) -> dict:
     return repos_dict
 
 
+DEVELOPERS_JSON = os.path.join(os.path.dirname(__file__), "..", "developers.json")
+
+
+def update_developers_json(handle: str, repo_names: list[str]) -> None:
+    """Upsert the developer's repos list in developers.json."""
+    with open(DEVELOPERS_JSON, "r") as f:
+        developers = json.load(f)
+
+    for dev in developers:
+        if dev["handle"].lower() == handle.lower():
+            dev["repos"] = repo_names
+            break
+    else:
+        developers.append({"handle": handle, "validated_by": [], "repos": repo_names})
+
+    with open(DEVELOPERS_JSON, "w") as f:
+        json.dump(developers, f, indent=2)
+        f.write("\n")
+
+    print(f"Updated developers.json for @{handle} with {len(repo_names)} repo(s).")
+
+
 def main():
+    parser = argparse.ArgumentParser(
+        description="Fetch repos a developer committed to in the last 90 days."
+    )
+    parser.add_argument("handle", help="GitHub username")
+    args = parser.parse_args()
 
-
-    repos_dict = collect_all_repos(USERNAME)
-    print(repos_dict)
-    return
+    repos_dict = collect_all_repos(args.handle)
 
     if not repos_dict:
         print("No contributions found.")
@@ -104,6 +127,8 @@ def main():
         print(f"{count:<10} {name}{private}")
 
     print(f"\nTotal repos: {len(repos_dict)}")
+
+    update_developers_json(args.handle, list(repos_dict.keys()))
 
 
 if __name__ == "__main__":
