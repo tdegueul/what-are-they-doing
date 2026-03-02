@@ -192,17 +192,15 @@
       "our name"
     ],
     "repos": [
-      "dahisea/All-Repo-Trending",
-      "ruvnet/agentic-flow",
-      "subnirvake/vector-sh",
       "ruvnet/ruflo",
+      "ruvnet/ruvector",
+      "ruvnet/agentic-flow",
+      "ruvnet/wifi-densepose",
       "agenticsorg/hackathon-tv5",
-      "URF365LLC/SELF-AI",
-      "while-basic/c-flow",
-      "EarthmanWeb/claude-flow-plugin",
-      "CreekBar/claude-flow",
-      "nolandubeau/hackathon-tv5",
-      "ruvnet/ruvector"
+      "ruvnet/ruv-FANN",
+      "ruvnet/marketing",
+      "ruvnet/QuDAG",
+      "ruvnet/ruvnet"
     ]
   }
 ]
