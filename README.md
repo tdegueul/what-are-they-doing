@@ -10,6 +10,9 @@ Open questions:
 - what do they do? what kind of software engineering
 - who commits 24 hour a day.
 
+GitHub's leaderboard:
+- https://gitista.com/
+
 "Agentic Much":
   - Paper: https://arxiv.org/pdf/2601.18341
   - Code/artifacts: https://github.com/labri-progress/agent-mining
