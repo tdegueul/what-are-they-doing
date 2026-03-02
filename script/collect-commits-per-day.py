@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 """Collect commits per day for a developer in a given month.
 
-Repos are discovered via the GitHub contributionsCollection GraphQL API
-(same source as list_repos_by_user_with_events.py), so private repos are
-included when the token has access.
+Repos are read from developers.json in the repository root.
 
 Usage:
     python script/collect-commits-per-day.py --developer steipete --month 2025-12
@@ -21,7 +19,7 @@ import json
 import sys
 import time
 from calendar import monthrange
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, timedelta
 from pathlib import Path
 
 import keyring
@@ -29,25 +27,9 @@ import requests
 
 REPO_ROOT = Path(__file__).parent.parent
 DATA_DIR = REPO_ROOT / "data"
+DEVELOPERS_FILE = REPO_ROOT / "developers.json"
 
 PER_PAGE = 100
-
-GRAPHQL_QUERY = """
-query($login: String!, $from: DateTime!, $to: DateTime!) {
-  user(login: $login) {
-    contributionsCollection(from: $from, to: $to) {
-      commitContributionsByRepository(maxRepositories: 100) {
-        repository {
-          nameWithOwner
-        }
-        contributions {
-          totalCount
-        }
-      }
-    }
-  }
-}
-"""
 
 
 def build_session(token: str) -> requests.Session:
@@ -76,36 +58,6 @@ def get_with_retry(session: requests.Session, url: str, params: dict) -> dict:
 
         resp.raise_for_status()
         return resp.json()
-
-
-def fetch_repos_for_month(
-    session: requests.Session, handle: str, year: int, month: int, num_days: int
-) -> list[str]:
-    """Return list of repo nameWithOwner strings the user contributed to in the given month."""
-    from_dt = datetime(year, month, 1, tzinfo=timezone.utc)
-    to_dt = datetime(year, month, num_days, 23, 59, 59, tzinfo=timezone.utc)
-
-    resp = session.post(
-        "https://api.github.com/graphql",
-        json={
-            "query": GRAPHQL_QUERY,
-            "variables": {
-                "login": handle,
-                "from": from_dt.isoformat(),
-                "to": to_dt.isoformat(),
-            },
-        },
-    )
-    resp.raise_for_status()
-    data = resp.json()
-
-    if "errors" in data:
-        raise RuntimeError(f"GraphQL errors: {data['errors']}")
-
-    contributions = (
-        data["data"]["user"]["contributionsCollection"]["commitContributionsByRepository"]
-    )
-    return [entry["repository"]["nameWithOwner"] for entry in contributions]
 
 
 def fetch_commits_for_repo_day(
@@ -165,6 +117,12 @@ def main() -> None:
     month_str = f"{year}-{month:02d}"
     num_days = monthrange(year, month)[1]
 
+    developers = json.loads(DEVELOPERS_FILE.read_text())
+    dev_entry = next((d for d in developers if d["handle"] == handle), None)
+    if dev_entry is None:
+        sys.exit(f"Developer '{handle}' not found in {DEVELOPERS_FILE}")
+    repos = dev_entry["repos"]
+
     token = keyring.get_password("login2", "github_token")
     if not token:
         sys.exit(
@@ -177,11 +135,7 @@ def main() -> None:
     out_file = DATA_DIR / f"{handle}-{month_str}.json"
 
     print(f"Collecting commits for @{handle}  {month_str}  ({num_days} days)")
-
-    # Step 1: discover repos from contributions API
-    print("Fetching repo list from contributionsCollection …")
-    repos = fetch_repos_for_month(session, handle, year, month, num_days)
-    print(f"  {len(repos)} repo(s): {', '.join(repos)}")
+    print(f"  {len(repos)} repo(s) from developers.json: {', '.join(repos)}")
 
     result = {
         "developer": handle,
@@ -191,7 +145,6 @@ def main() -> None:
     }
     total_saved = 0
 
-    # Step 2: for each day, collect commits across all repos
     for day_num in range(1, num_days + 1):
         day = date(year, month, day_num)
         day_str = day.isoformat()
