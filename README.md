@@ -18,6 +18,9 @@ GitHub's leaderboard:
   - Paper: https://arxiv.org/pdf/2601.18341
   - Code/artifacts: https://github.com/labri-progress/agent-mining
 
+How steinpete works:
+  - https://steipete.me/posts/2025/shipping-at-inference-speed
+
 ## Claude code commits
 9.6M today
 https://github.com/search?q=%22noreply%40anthropic.com%22&type=commits
