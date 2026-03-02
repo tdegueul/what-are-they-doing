@@ -12,6 +12,7 @@ Open questions:
 
 GitHub's leaderboard:
 - https://gitista.com/
+- https://committers.top/
 
 "Agentic Much":
   - Paper: https://arxiv.org/pdf/2601.18341
