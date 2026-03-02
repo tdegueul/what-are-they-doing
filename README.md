@@ -16,7 +16,7 @@ GitHub's leaderboard:
 - https://gitista.com/
 - https://committers.top/
 
-Tentative: joaovitoriasilva
+Tentative: joaovitoriasilva, nicholaspsmith
 
 How steinpete works:
   - https://steipete.me/posts/2025/shipping-at-inference-speed
