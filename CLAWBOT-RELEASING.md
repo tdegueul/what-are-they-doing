@@ -4,9 +4,12 @@
 - CI skips documentation-only changes to speed up feedback
 - CI infers a "scope" from the diff: android vs node vs macos, etc; and skips unaffected platforms
 - CI include type, format, and lint checks
+- CI runs smoke tests, regular tests, and tests the installer
 - PRs are checked by: Codex, Greptile, etc. (LLMs reviewing LLMs)
 
 ## Releases
+- Calendar-versioned and channel-based
+- There is a 6 hour delay on auto-updates!
 - Releases are organized into three update channels:
   - stable — official released versions with tags like vYYYY.M.D and npm dist-tag latest.
   - beta — prereleases with tags such as vYYYY.M.D-beta.N and npm dist-tag beta.
