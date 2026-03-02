@@ -204,38 +204,6 @@
     ]
   },
   {
-    "handle": "nekomeowww",
-    "repos": [
-      "moeru-ai/airi",
-      "lobehub/lobehub",
-      "moeru-ai/eventa",
-      "moeru-ai/lerobot-rc",
-      "moeru-ai/lerobot-visualize",
-      "proj-airi/iconify-meteocons",
-      "proj-airi/iconify-lobe-icons",
-      "proj-airi/knoway",
-      "nekomeowww/shaderr",
-      "moeru-ai/unspeech",
-      "moeru-ai/injeca",
-      "nekomeowww/iconify-inspector",
-      "nekomeowww/talks",
-      "moeru-ai/velin",
-      "nolebase/integrations",
-      "moeru-ai/deditor",
-      "moeru-ai/lerobot-rs",
-      "guiiai/logg",
-      "lingticio/neuri-js",
-      "moeru-ai/std",
-      "moeru-ai/ortts",
-      "nekomeowww/nekomeowww",
-      "groupultra/telegram-search",
-      "huggingface/lerobot",
-      "nekomeowww/factorio-rcon-api",
-      "nekomeowww/ollama-operator",
-      "nekomeowww/lobe-chat-renovate"
-    ]
-  },
-  {
     "handle": "Kitenite",
     "repos": [
       "superset-sh/superset",
