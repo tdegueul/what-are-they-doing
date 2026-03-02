@@ -204,14 +204,6 @@
     ]
   },
   {
-    "handle": "Kitenite",
-    "repos": [
-      "superset-sh/superset",
-      "mastra-ai/mastra",
-      "superset-sh/homebrew-superset"
-    ]
-  },
-  {
     "handle": "obra",
     "repos": [
       "prime-radiant-inc/serf",
