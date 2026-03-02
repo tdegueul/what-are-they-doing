@@ -6,6 +6,7 @@ Repos are read from developers.json in the repository root.
 Usage:
     python script/collect-commits-per-day.py --developer steipete --month 2025-12
     python script/collect-commits-per-day.py --developer steipete  # Sep 2025 – Feb 2026
+    python script/collect-commits-per-day.py --all                 # all developers, Sep 2025 – Feb 2026
 
 Output:
     data/{developer}-{YYYY-MM}.json  — one file for the whole month
@@ -108,7 +109,8 @@ def main() -> None:
         (2026, 1), (2026, 2),
     ]
 
-    parser.add_argument("--developer", required=True, help="GitHub handle")
+    parser.add_argument("--developer", help="GitHub handle")
+    parser.add_argument("--all", action="store_true", help="Collect for all developers in developers.json")
     parser.add_argument(
         "--month",
         type=parse_month,
@@ -117,14 +119,19 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    handle: str = args.developer
+    if not args.all and not args.developer:
+        parser.error("one of --developer or --all is required")
+
     months = [args.month] if args.month else DEFAULT_MONTHS
 
     developers = json.loads(DEVELOPERS_FILE.read_text())
-    dev_entry = next((d for d in developers if d["handle"] == handle), None)
-    if dev_entry is None:
-        sys.exit(f"Developer '{handle}' not found in {DEVELOPERS_FILE}")
-    repos = dev_entry["repos"]
+    if args.all:
+        dev_entries = developers
+    else:
+        dev_entry = next((d for d in developers if d["handle"] == args.developer), None)
+        if dev_entry is None:
+            sys.exit(f"Developer '{args.developer}' not found in {DEVELOPERS_FILE}")
+        dev_entries = [dev_entry]
 
     token = keyring.get_password("login2", "github_token")
     if not token:
@@ -136,44 +143,48 @@ def main() -> None:
     session = build_session(token)
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-    for year, month in months:
-        month_str = f"{year}-{month:02d}"
-        num_days = monthrange(year, month)[1]
-        out_file = DATA_DIR / f"{handle}-{month_str}.json"
+    for dev_entry in dev_entries:
+        handle = dev_entry["handle"]
+        repos = dev_entry["repos"]
 
-        print(f"Collecting commits for @{handle}  {month_str}  ({num_days} days)")
-        print(f"  {len(repos)} repo(s) from developers.json: {', '.join(repos)}")
+        for year, month in months:
+            month_str = f"{year}-{month:02d}"
+            num_days = monthrange(year, month)[1]
+            out_file = DATA_DIR / f"{handle}-{month_str}.json"
 
-        result = {
-            "developer": handle,
-            "month": month_str,
-            "repos": repos,
-            "days": {},
-        }
-        total_saved = 0
+            print(f"Collecting commits for @{handle}  {month_str}  ({num_days} days)")
+            print(f"  {len(repos)} repo(s) from developers.json: {', '.join(repos)}")
 
-        for day_num in range(1, num_days + 1):
-            day = date(year, month, day_num)
-            day_str = day.isoformat()
-
-            all_commits = []
-            for repo in repos:
-                commits = fetch_commits_for_repo_day(session, repo, handle, day)
-                all_commits.extend(commits)
-                if commits:
-                    time.sleep(0.5)
-
-            total_saved += len(all_commits)
-            result["days"][day_str] = {
-                "total_count": len(all_commits),
-                "sampled": len(all_commits),
-                "commits": all_commits,
+            result = {
+                "developer": handle,
+                "month": month_str,
+                "repos": repos,
+                "days": {},
             }
-            print(f"  {day_str}  {len(all_commits):>3} commits")
-            time.sleep(1)
+            total_saved = 0
 
-        out_file.write_text(json.dumps(result, indent=2) + "\n")
-        print(f"\nDone. {total_saved} commits saved to {out_file.relative_to(REPO_ROOT)}")
+            for day_num in range(1, num_days + 1):
+                day = date(year, month, day_num)
+                day_str = day.isoformat()
+
+                all_commits = []
+                for repo in repos:
+                    commits = fetch_commits_for_repo_day(session, repo, handle, day)
+                    all_commits.extend(commits)
+                    if commits:
+                        time.sleep(0.5)
+
+                total_saved += len(all_commits)
+                result["days"][day_str] = {
+                    "total_count": len(all_commits),
+                    "sampled": len(all_commits),
+                    "commits": all_commits,
+                }
+                print(f"  {day_str}  {len(all_commits):>3} commits")
+                time.sleep(1)
+
+            out_file.write_text(json.dumps(result, indent=2) + "\n")
+            print(f"\nDone. {total_saved} commits saved to {out_file.relative_to(REPO_ROOT)}")
 
 
 if __name__ == "__main__":
