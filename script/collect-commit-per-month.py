@@ -279,7 +279,7 @@ def main() -> None:
 
         # Step 1 — discover non-fork owned repos
         repos = list_repos_by_user_with_events.collect_all_repos(handle)
-        print(f"  {len(repos)} repo(s found for user")
+        print(f"  {len(repos)} repos found for user")
         dev["repos"] = repos  # store for transparency / debugging
         time.sleep(INTER_REQUEST_SLEEP)
 
