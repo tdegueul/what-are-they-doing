@@ -21,6 +21,46 @@ GitHub's leaderboard:
 9.6M today
 https://github.com/search?q=%22noreply%40anthropic.com%22&type=commits
 
+## Scripts
+
+All scripts live in `script/` and read a GitHub token from the system keyring
+(`service="login2"`, `username="github_token"`).
+
+### Data collection
+
+| Script | Description |
+|---|---|
+| `collect-commits-per-day.py` | Collects all commits for a developer in a given month via the GitHub contributionsCollection GraphQL API (includes private repos). Writes `data/{developer}-{YYYY-MM}.json`. Usage: `python script/collect-commits-per-day.py --developer steipete --month 2025-12` |
+| `collect-commit-per-month.py` | Collects monthly commit counts for every developer in `developers.json` by iterating over their non-fork repos (avoids fork inflation). Writes results back to `developers.json`. |
+| `list_repos_by_user_with_events.py` | Fetches all repos where a developer committed in the last 3 months via the GitHub GraphQL contributionsCollection API and updates `developers.json`. |
+
+### Analysis
+
+| Script | Description |
+|---|---|
+| `analyze-commits.py` | Analyses commit messages using Conventional Commits conventions (type breakdown, scopes, breaking changes). Usage: `python script/analyze-commits.py data/steipete-2025-12.json` |
+| `analyze-commit-quality.py` | Scores commits as "good" or "dirty" by fetching changed files from the GitHub API and applying heuristics (focused vs scattered, test coupling, diff size, etc.). Commit details are cached in `data/commits/{sha}.json`. Usage: `python script/analyze-commit-quality.py data/steipete-2025-12.json` |
+| `analyze-repo-switching.py` | Analyses how a developer switches between repositories over time (concentration, consecutive switches, bouncebacks, day-by-day timeline). Usage: `python script/analyze-repo-switching.py developers.json --author steipete --month 2025-12` |
+| `visualize-file-touches.py` | Fetches per-commit file details and prints a terminal report covering file categories, change sizes, language hotspots, test/docs coupling, and engineering-signal heuristics. Usage: `python script/visualize-file-touches.py developers.json --author steipete --month 2025-12` |
+| `detect-agents.py` | Detects which coding agents (Claude Code, Cursor, etc.) are used in a developer's commits via agent-mining heuristics (co-author trailers, message patterns, config files). Usage: `python script/detect-agents.py data/steipete-2025-12.json` |
+| `histogram-commit-time.py` | Prints a horizontal bar chart of commit counts by UTC hour from a monthly data file. Usage: `python script/histogram-commit-time.py data/steipete-2025-12.json` |
+| `top10-projects-dec2025.py` | One-off script that lists the top-10 repos where `steipete` committed in December 2025. |
+
+### Typical workflow
+
+```
+# 1. Collect monthly commit data
+python script/collect-commits-per-day.py --developer steipete --month 2025-12
+
+# 2. Analyse the collected data
+python script/analyze-commits.py        data/steipete-2025-12.json
+python script/analyze-commit-quality.py data/steipete-2025-12.json
+python script/detect-agents.py          data/steipete-2025-12.json
+python script/histogram-commit-time.py  data/steipete-2025-12.json
+python script/analyze-repo-switching.py developers.json --author steipete --month 2025-12
+python script/visualize-file-touches.py developers.json --author steipete --month 2025-12
+```
+
 ## Architecture
 
 We use https://github.com/labri-progress/agent-mining as submodule
