@@ -29,11 +29,12 @@ from pathlib import Path
 
 import keyring
 import requests
+import list_repos_by_user_with_events
 
 REPO_ROOT = Path(__file__).parent.parent
 DEVELOPERS_FILE = REPO_ROOT / "developers.json"
 
-START = (2025, 1)
+START = (2025, 10)
 
 MONTH_ABBR = [
     "jan", "feb", "mar", "apr", "may", "jun",
@@ -277,8 +278,8 @@ def main() -> None:
         print(f"Developer: @{handle}")
 
         # Step 1 — discover non-fork owned repos
-        repos = get_repos_committed_in_december(handle, session)
-        print(f"  {len(repos)} owned non-fork repo(s) found")
+        repos = list_repos_by_user_with_events.collect_all_repos(handle)
+        print(f"  {len(repos)} repo(s found for user")
         dev["repos"] = repos  # store for transparency / debugging
         time.sleep(INTER_REQUEST_SLEEP)
 
