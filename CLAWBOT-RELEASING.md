@@ -6,6 +6,7 @@
 - CI include type, format, and lint checks
 - CI runs smoke tests, regular tests, and tests the installer
 - PRs are checked by: Codex, Greptile, etc. (LLMs reviewing LLMs)
+- PRs are classified by i) size (S, XS, L, etc.) ii) contributor "trustworthiness"
 
 ## Releases
 - Calendar-versioned and channel-based
