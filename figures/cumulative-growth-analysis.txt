@@ -1,0 +1,16 @@
+Range: 2025-09-01 to 2026-02-28 (181 days)
+Total cumulative commits: 72888
+Average daily commits, first 28 days: 14.32
+Average daily commits, last 28 days:  900.68
+Rise factor (late / early): 62.89x
+Peak daily total: 1739
+Best fit by AIC: quadratic
+Interpretation: daily commit velocity is increasing over time.
+
+Model comparison (x = days since period start)
+
+Model             R^2         RMSE          AIC  Equation
+------------ -------- ------------ ------------  ----------------------------
+*quadratic     0.9959      1438.71      2638.28  y = 4044.33 - 283.12x + 3.7387x^2
+ linear        0.8293      9241.39      3309.58  y = -16032.55 + 389.85x
+ exponential  -0.0194     22583.61      3633.04  y = 128.54 * e^(0.0403x)
