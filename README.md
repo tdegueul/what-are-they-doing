@@ -68,6 +68,7 @@ The following developers are candidates identified during screening; data collec
 | [Gary Basin](https://github.com/gbasin) | Friend of Dicklesworthstone |
 | [Jesse Vincent](https://github.com/obra) | Creator of "superpowers" skill set, and has cool glasses |
 | [Brian Krabach](https://github.com/bkrabach) | Works on Microsoft Amplifier, and has a cool beard |
+| [Wilson Lin](https://github.com/wilsonzlin) | The "cursor web browser guy" and a few other such projects |
 
 ### False Positives
 
