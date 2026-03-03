@@ -57,7 +57,7 @@ In other words, the dataset is intentionally **curated rather than mechanically 
 Additional developpers:
 | Handle | Analysis | One liner presentation |
 |---|---|---|
-| [Steve Yegge](https://github.com/steveyegge)| [./steveyegge.md] | Vibe-coded popular projects beads (issue tracking) and Gas Town (agent orchestration) |
+| [Steve Yegge](https://github.com/steveyegge)| -- | Vibe-coded popular projects beads (issue tracking) and Gas Town (agent orchestration) |
 
 
 ## Dataset statistics
