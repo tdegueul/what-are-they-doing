@@ -15,6 +15,8 @@ Token retrieved from keyring: service='login2', username='github_token_2'.
 
 Usage:
     python script/collect-individual-commits.py
+    python script/collect-individual-commits.py --developer steipete
+    python script/collect-individual-commits.py --developer steipete --month 2026-02
     python script/collect-individual-commits.py --dry-run
 """
 
@@ -63,10 +65,15 @@ def get_with_retry(session: requests.Session, url: str) -> dict | None:
         return resp.json()
 
 
-def collect_referenced_commits() -> dict[str, str]:
-    """Return {sha: api_url} for every commit in any data/*.json file."""
+def collect_referenced_commits(data_files: list[Path] | None = None) -> dict[str, str]:
+    """Return {sha: api_url} for every commit in the given data files.
+
+    If data_files is None, all data/*.json files are scanned.
+    """
     result: dict[str, str] = {}
-    for data_file in sorted(DATA_DIR.glob("*.json")):
+    if data_files is None:
+        data_files = sorted(DATA_DIR.glob("*.json"))
+    for data_file in data_files:
         data = json.loads(data_file.read_text())
         for day_data in data.get("days", {}).values():
             for commit in day_data.get("commits", []):
@@ -81,6 +88,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Download missing commit details and remove stale cache files."
     )
+    parser.add_argument("--developer", metavar="HANDLE", help="Limit to data files for this developer.")
+    parser.add_argument("--month", metavar="YYYY-MM", help="Limit to data files for this month.")
     parser.add_argument(
         "--dry-run",
         action="store_true",
@@ -88,9 +97,21 @@ def main() -> None:
     )
     args = parser.parse_args()
 
+    # ── Determine which data files to scan ────────────────────────────────
+    if args.developer or args.month:
+        developer_pat = args.developer or "*"
+        month_pat = args.month or "*"
+        data_files = sorted(DATA_DIR.glob(f"{developer_pat}-{month_pat}.json"))
+        if not data_files:
+            sys.exit(
+                f"No data files found matching developer={args.developer!r}, month={args.month!r}"
+            )
+    else:
+        data_files = None  # all files
+
     # ── Collect all SHAs referenced by data files ─────────────────────────
     print("Scanning data files …")
-    referenced = collect_referenced_commits()
+    referenced = collect_referenced_commits(data_files)
     print(f"  {len(referenced)} unique SHAs referenced in data files")
 
     # ── Determine which commits need downloading ───────────────────────────
@@ -98,7 +119,12 @@ def main() -> None:
     existing = {p.stem for p in COMMITS_DIR.glob("*.json")}
 
     to_download = {sha: url for sha, url in referenced.items() if sha not in existing}
-    to_delete = [COMMITS_DIR / f"{sha}.json" for sha in existing if sha not in referenced]
+    # Only remove stale files when scanning all data files (no filter applied)
+    to_delete = (
+        [COMMITS_DIR / f"{sha}.json" for sha in existing if sha not in referenced]
+        if data_files is None
+        else []
+    )
 
     print(f"  {len(existing)} commit files already cached")
     print(f"  {len(to_download)} commits to download")
