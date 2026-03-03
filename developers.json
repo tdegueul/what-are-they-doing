@@ -263,5 +263,31 @@
       "philipp-spiess/any-agent",
       "steipete/CodexBar"
     ]
+  },
+  {
+    "handle": "mavam",
+    "repos": [
+      "tenzir/tenzir",
+      "tenzir/docs",
+      "tenzir/claude-plugins",
+      "tenzir/ship",
+      "mavam/dotfiles",
+      "tenzir/test",
+      "tenzir/news",
+      "tenzir/mcp",
+      "tenzir/library",
+      "tenzir/pi-tenzir",
+      "tenzir/tree-sitter-tql",
+      "tenzir/pi-tenzir-dev",
+      "mavam/pi-fancy-footer",
+      "mavam/pi-terminal-theme",
+      "mavam/pi-mcporter",
+      "tenzir/pi-agents",
+      "tenzir/security-lake-tools",
+      "tenzir/vscode-tql",
+      "tenzir/platform",
+      "tenzir/codemirror-lang-tql",
+      "tenzir/zed-tql"
+    ]
   }
 ]
