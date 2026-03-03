@@ -66,6 +66,7 @@ The following developers are candidates identified during screening; data collec
 | [Dexploarer](https://github.com/Dexploarer) | Another top Claude Code user with visible GitHub activity |
 | [haasonsaas](https://github.com/haasonsaas) | Top Claude Code user |
 | [Gary Basin](https://github.com/gbasin) | Friend of Dicklesworthstone |
+| [Jesse Vincent](https://github.com/obra) | Creator of "superpowers" skill set |
 
 ### False Positives
 
