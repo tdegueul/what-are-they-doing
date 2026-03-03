@@ -60,6 +60,7 @@ Additional developpers:
 |---|---|---|
 | [Steve Yegge](https://github.com/steveyegge)| -- | Vibe-coded popular projects beads (issue tracking) and Gas Town (agent orchestration) |
 | [kaptinlin](https://github.com/kaptinlin) | -- | in the list of top Claude Code users & with visible github activity |
+| [Dexploarer](https://github.com/Dexploarer) | -- | another top claude code user with visible GH activity |
 
 ### False Positives
 
