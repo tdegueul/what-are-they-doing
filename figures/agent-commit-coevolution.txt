@@ -1,0 +1,12 @@
+Range: 2025-09-01 to 2026-02-28
+Granularity: week
+Sampled developers aggregated: 5 (Dicklesworthstone, obra, philipp-spiess, ruvnet, steipete)
+Periods: 26
+Total commits: 72,888
+Embedded commit records: 68,407
+Agent-signaled commit records: 35,548
+Overall agent share of commit records: 52.0%
+Correlation, total commits vs agent-signaled records: 0.9078
+Correlation, total commits vs agent share: 0.6496
+Peak commit period: Week of 2026-02-09 (8,530 commits)
+Peak agent-signaled period: Week of 2026-02-09 (5,881 records)
