@@ -34,7 +34,15 @@ Then, TODO explain the methodology for qualitative curation.
 
 ## Covered Developers
 
-TODO — add table of developers with handle, time range, and commit count.
+| Handle | GitHub | One liner presentation |
+|---|---|---|---|
+| steipete | https://github.com/steipete | TODO |
+| Dicklesworthstone | https://github.com/Dicklesworthstone | TODO |
+| ruvnet | https://github.com/ruvnet | TODO |
+| obra | https://github.com/obra | TODO |
+| philipp-spiess | https://github.com/philipp-spiess | TODO |
+| mavam | https://github.com/mavam | TODO |
+| teamchong | https://github.com/teamchong | TODO |
 
 ## Dataset statistics
 
