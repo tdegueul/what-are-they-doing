@@ -30,7 +30,7 @@ Candidate developers are identified with the following sources:
 - Github queries (see `script/find_agentic_ai_coders.py`)
 - [Gitista](https://gitista.com/)
 - [committers.top](https://committers.top/)
-- Another possibility: [top claude code users](https://www.claudecount.com). Needs to be linked to github profiles though
+- [claudecount.com](https://www.claudecount.com) leaderboard of Claude Code usage, cross-referenced with GitHub profiles
 
 Selection is then performed as a qualitative curation process by a team of expert software engineering researchers. We do not rely on a single automatic rule. Instead, we combine automated evidence with manual assessment of each candidate developer and their repositories.
 
@@ -55,21 +55,24 @@ In other words, the dataset is intentionally **curated rather than mechanically 
 | [mavam](https://github.com/mavam) | [mavam.md](mavam.md) | A developer and CEO working on data pipelines for security operations using Claude for productivity |
 | [teamchong](https://github.com/teamchong) | [teamchong.md](teamchong.md) | A developer with a super-human burst of commit productivity followed by a fall from grace |
 
-Additional developpers:
-| Handle | Analysis | One liner presentation |
-|---|---|---|
-| [Steve Yegge](https://github.com/steveyegge)| -- | Vibe-coded popular projects beads (issue tracking) and Gas Town (agent orchestration) |
-| [kaptinlin](https://github.com/kaptinlin) | -- | in the list of top Claude Code users & with visible github activity |
-| [Dexploarer](https://github.com/Dexploarer) | -- | another top claude code user with visible GH activity |
-| [haasonsaas](https://github.com/haasonsaas) | -- | top CC user too |
+### Candidate Developers Under Evaluation
+
+The following developers are candidates identified during screening; data collection for this group is ongoing and they are not yet part of the main dataset.
+
+| Handle | One liner presentation |
+|---|---|
+| [steveyegge](https://github.com/steveyegge) | Vibe-coded popular projects beads (issue tracking) and Gas Town (agent orchestration) |
+| [kaptinlin](https://github.com/kaptinlin) | In the list of top Claude Code users with visible GitHub activity |
+| [Dexploarer](https://github.com/Dexploarer) | Another top Claude Code user with visible GitHub activity |
+| [haasonsaas](https://github.com/haasonsaas) | Top Claude Code user |
 
 ### False Positives
 
 Notes about inspected developers who appeared to be agent-supported but did not meet our qualitative inspection criteria appear in markdown files in the [false positive](false-positive) directory.
 
-## Dataset statistics
+## Dataset Statistics
 
-## Overview
+### Overview
 | Metric | Value |
 | --- | --- |
 | Observation window | 2025-09-01 to 2026-02-28 |
@@ -80,7 +83,7 @@ Notes about inspected developers who appeared to be agent-supported but did not 
 | Distinct detected agent labels | 8 |
 | Most frequent detected agent | claude_code (36,493 commits) |
 
-## Developer Coverage
+### Developer Coverage
 | Developer | Month span | Tracked repos | Commits | Active days | Peak day | Agent commits | Agent % | Top agent |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Dicklesworthstone | 2025-09..2026-02 | 100 | 42,549 | 127 | 1,115 | 29,610 | 77.1% | claude_code |
