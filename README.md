@@ -9,7 +9,7 @@ The goal of this dataset is to enable studies of AI-augmented software engineeri
 
 ```bibtex
 @dataset{whataretheydoing2026,
-  author    = {Thomas Degueule and Bernd Freisleben and Shane McIntosh and Martin Monperrus and Aaron Randrianaina},
+  author    = {Thomas Degueule and Bernd Freisleben and Shane McIntosh and Martin Monperrus and Aaron Randrianaina and Romain Robbes},
   title     = {What are they doing? A Commit-Level Dataset of Hyperactive AI-augmented Developers on GitHub},
   howpublished     = {Dataset on Zenodo},
   year      = {2026},
