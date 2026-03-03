@@ -4,21 +4,6 @@ This dataset captures the commit activity of a curated set of highly active, age
 
 The goal of this dataset is to enable studies of AI-augmented software engineering behavior, agent adoption patterns, repository switching, commit quality, and temporal activity rhythms. The dataset currently covers 7 developers.
 
-
-> **If you use this dataset, please cite it as below.**
-
-```bibtex
-@dataset{whataretheydoing2026,
-  author    = {Thomas Degueule and Bernd Freisleben and Shane McIntosh and Martin Monperrus and Aaron Randrianaina and Romain Robbes},
-  title     = {What are they doing? A Commit-Level Dataset of Hyperactive AI-augmented Developers on GitHub},
-  howpublished     = {Dataset on Zenodo},
-  year      = {2026},
-  publisher = {Zenodo},
-  doi       = {10.5281/zenodo.18850301},
-  url       = {https://doi.org/10.5281/zenodo.18850301}
-}
-```
-
 This dataset has been produced at the Bellairs'26 Workshop on Continuous Software Engineering.
 
 ---
