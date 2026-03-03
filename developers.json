@@ -243,5 +243,25 @@
       "microsoft/amplifier",
       "obra/comic-ocr"
     ]
+  },
+  {
+    "handle": "philipp-spiess",
+    "repos": [
+      "agentlogs/agentlogs",
+      "philipp-spiess/modern",
+      "philipp-spiess/spiess.dev",
+      "philipp-spiess/openfuse",
+      "philipp-spiess/walkingdevs.com",
+      "agentlogs/claude-code",
+      "philipp-spiess/pi-parallel-web-search",
+      "philipp-spiess/anchor-stack",
+      "philipp-spiess/philipp-spiess",
+      "openclaw/openclaw",
+      "philipp-spiess/memos",
+      "philipp-spiess/ai",
+      "philipp-spiess/pi-slot-machine",
+      "philipp-spiess/any-agent",
+      "steipete/CodexBar"
+    ]
   }
 ]
