@@ -91,6 +91,17 @@ Notes about inspected developers who appeared to be agent-supported but did not 
 | steipete | 2025-09..2026-02 | 71 | 21,222 | 130 | 630 | 65 | 0.3% | codex |
 | teamchong | 2025-09..2026-02 | 10 | 5,799 | 108 | 295 | 36 | 0.6% | claude_code |
 
+## Commits Over Time
+
+![Commits per month per developer](figures/commits-over-time-separate.png)
+
+Key findings from the figure:
+
+- **Aggregate growth**: Total monthly commits across all developers grew from under 1,000 in Sep 2025 to over 26,000 by Jan–Feb 2026, reflecting a rapid ramp-up in AI-augmented activity over the observation window.
+- **Divergent trajectories**: Developers follow distinct patterns rather than a uniform trend. Dicklesworthstone and obra show sustained monotonic growth; steipete and mavam plateau at a high level after an initial ramp; ruvnet peaks in Jan 2026 and then declines; philipp-spiess shows a sudden late adoption spike starting in Jan 2026.
+- **Burst-and-collapse (teamchong)**: teamchong exhibits the sharpest burst-and-collapse pattern, peaking at ~3,100 commits in Dec 2025 before dropping to near-zero by Feb 2026 — consistent with their description as a developer with "a super-human burst of commit productivity followed by a fall from grace."
+
+
 ---
 
 

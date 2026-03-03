@@ -18,7 +18,7 @@ from datetime import date
 REPO_ROOT = Path(__file__).parent.parent
 DATA_DIR = REPO_ROOT / "data"
 DEVELOPERS_FILE = REPO_ROOT / "developers.json"
-OUTPUT_FILE = "figures/commits-over-time-separate.png"
+OUTPUT_FILE = Path("figures/commits-over-time-separate.png")
 
 
 def load_month_commit_count(filepath: Path) -> int:
@@ -85,9 +85,28 @@ def main() -> None:
         plt.setp(ax.get_xticklabels(), rotation=45, ha="right")
         ax.grid(True, alpha=0.3)
 
-    # Hide any unused axes
-    for j in range(n, nrows * ncols):
-        axes[j // ncols][j % ncols].set_visible(False)
+    # Use the first unused slot for a stacked bar chart of all developers
+    if n < nrows * ncols:
+        ax = axes[n // ncols][n % ncols]
+        x = list(range(len(all_months)))
+        bottoms = [0] * len(all_months)
+        for i, (handle, monthly) in enumerate(devs):
+            counts = [monthly.get(m, 0) for m in all_months]
+            ax.bar(x, counts, bottom=bottoms, label=f"@{handle}", color=f"C{i}")
+            bottoms = [b + c for b, c in zip(bottoms, counts)]
+        ax.set_title("All Developers (Stacked)", fontsize=12, fontweight="bold")
+        ax.set_ylabel("Commits")
+        labels = [date(int(m[:4]), int(m[5:7]), 1).strftime("%b %Y") for m in all_months]
+        ax.set_xticks(x)
+        ax.set_xticklabels(labels, rotation=45, ha="right")
+        ax.legend(fontsize=8, loc="upper left")
+        ax.grid(True, alpha=0.3, axis="y")
+        # Hide any remaining unused axes beyond the stacked chart
+        for j in range(n + 1, nrows * ncols):
+            axes[j // ncols][j % ncols].set_visible(False)
+    else:
+        for j in range(n, nrows * ncols):
+            axes[j // ncols][j % ncols].set_visible(False)
 
     plt.tight_layout()
     OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
