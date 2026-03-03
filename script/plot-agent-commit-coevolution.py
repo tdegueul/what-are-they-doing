@@ -279,38 +279,33 @@ def plot(
     labels = [item.label for item in stats]
     total_commits = [item.total_commits for item in stats]
     agent_records = [item.agent_commit_records for item in stats]
-    agent_share = [item.agent_share for item in stats]
-    coverage = [item.coverage for item in stats]
 
     xs = list(range(len(stats)))
-    scatter_x = [float(value) for value in total_commits]
-    scatter_y = [float(value) for value in agent_records]
-    slope, intercept = linear_fit(scatter_x, scatter_y)
-    fit_y = [intercept + slope * value for value in scatter_x]
-
-    fig = plt.figure(figsize=(15, 12))
-    grid = fig.add_gridspec(4, 1, height_ratios=[3.0, 2.3, 2.6, 1.8])
-    ax_main = fig.add_subplot(grid[0])
-    ax_share = fig.add_subplot(grid[1], sharex=ax_main)
-    ax_scatter = fig.add_subplot(grid[2])
-    ax_text = fig.add_subplot(grid[3])
-    ax_text.axis("off")
+    fig, ax_main = plt.subplots(figsize=(15, 6.5))
 
     bar_color = "#264653"
     line_color = "#d62828"
-    share_color = "#2a9d8f"
-    coverage_color = "#e9c46a"
 
     ax_main.bar(xs, total_commits, color=bar_color, alpha=0.85, label="total commits")
     ax_main.set_ylabel("Total commits")
     ax_main.grid(axis="y", alpha=0.25)
     ax_main.set_title(
-        "Co-evolution of Commit Volume and Agent Use Across All Sampled Developers",
+        "Commit Volume and Agent-Signaled Commits Over Time",
         fontweight="bold",
     )
+    ax_main.set_xlabel("Period")
+    ax_main.set_xticks(xs)
+    ax_main.set_xticklabels(labels, rotation=45, ha="right")
 
     ax_main_twin = ax_main.twinx()
-    ax_main_twin.plot(xs, agent_records, color=line_color, marker="o", linewidth=2.2, label="agent-signaled records")
+    ax_main_twin.plot(
+        xs,
+        agent_records,
+        color=line_color,
+        marker="o",
+        linewidth=2.4,
+        label="agent-signaled commit records",
+    )
     ax_main_twin.set_ylabel("Agent-signaled commit records")
 
     combined_handles, combined_labels = [], []
@@ -320,42 +315,16 @@ def plot(
         combined_labels.extend(axis_labels)
     ax_main.legend(combined_handles, combined_labels, loc="upper left")
 
-    ax_share.plot(xs, agent_share, color=share_color, marker="o", linewidth=2.0, label="agent share of commit records")
-    ax_share.plot(xs, coverage, color=coverage_color, marker="s", linewidth=1.8, label="commit-record coverage")
-    ax_share.set_ylabel("Percent")
-    ax_share.set_ylim(0, max(max(agent_share, default=0), max(coverage, default=0), 5) * 1.15)
-    ax_share.grid(alpha=0.25)
-    ax_share.legend(loc="upper left")
-
-    ax_share.set_xticks(xs)
-    ax_share.set_xticklabels(labels, rotation=45, ha="right")
-    ax_share.set_xlabel("Period")
-
-    ax_scatter.scatter(scatter_x, scatter_y, color="#6a4c93", s=55, alpha=0.8)
-    ax_scatter.plot(scatter_x, fit_y, color="#1982c4", linewidth=2.0, label="linear fit")
-    for idx, label in enumerate(labels):
-        ax_scatter.annotate(label, (scatter_x[idx], scatter_y[idx]), fontsize=8, alpha=0.7)
-    ax_scatter.set_xlabel("Total commits per period")
-    ax_scatter.set_ylabel("Agent-signaled commit records per period")
-    ax_scatter.set_title("Per-period association")
-    ax_scatter.grid(alpha=0.25)
-    ax_scatter.legend(loc="upper left")
-
-    ax_text.text(
-        0.0,
-        1.0,
-        summary_text
-        + "\n\nInterpretation:\n"
-        + "- Top panel compares raw commit volume to the number of agent-signaled commit records.\n"
-        + "- Middle panel shows whether agent share rises with activity, while exposing commit-record coverage.\n"
-        + "- Bottom panel summarizes the period-by-period association with a scatter plot.",
+    fig.text(
+        0.5,
+        0.96,
+        "Bars show total commits from daily snapshot totals; the line shows commit records with at least one detected agent signal.",
+        ha="center",
         va="top",
-        ha="left",
-        family="monospace",
         fontsize=10,
     )
 
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0, 1, 0.93))
     output_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output_path, dpi=150, bbox_inches="tight")
     plt.close(fig)
