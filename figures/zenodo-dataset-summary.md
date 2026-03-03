@@ -4,41 +4,41 @@
 | Metric | Value |
 | --- | --- |
 | Tracked developers in registry | 7 |
-| Developers with local monthly snapshots | 5 |
-| Unsampled tracked developers | mavam, teamchong |
+| Developers with local monthly snapshots | 7 |
+| Unsampled tracked developers | - |
 | Observation window | 2025-09-01 to 2026-02-28 |
 | Distinct months with snapshots | 6 |
-| Developer-month snapshots | 30 |
+| Developer-month snapshots | 42 |
 | Tracked repositories in registry | 260 |
-| Tracked repositories with local snapshots | 229 |
-| Total commits from daily totals | 72,888 |
-| Embedded commit records | 68,407 |
-| Commit-record coverage | 93.9% |
-| Active developer-days | 559 |
-| Peak aggregate day | 2026-02-22 (1,739 commits) |
-| Commit records with >=1 agent signal | 35,548 / 68,407 (52.0%) |
+| Tracked repositories with local snapshots | 260 |
+| Total commits from daily totals | 81,230 |
+| Embedded commit records | 76,749 |
+| Commit-record coverage | 94.5% |
+| Active developer-days | 821 |
+| Peak aggregate day | 2026-02-16 (1,833 commits) |
+| Commit records with >=1 agent signal | 36,565 / 76,749 (47.6%) |
 | Commit records with >1 agent signal | 134 |
 | Distinct detected agent labels | 8 |
-| Most frequent detected agent | claude_code (35,477 hits) |
+| Most frequent detected agent | claude_code (36,493 hits) |
 | Cached commit-detail files | 1,759 |
 
 ## Developer Coverage
 | Developer | Status | Month span | Tracked repos | Commits | Commit records | Active days | Peak day | Agent commits | Agent % | Top agent |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Dicklesworthstone | sampled | 2025-09..2026-02 | 100 | 42,549 | 38,424 | 127 | 1,115 | 29,610 | 77.1% | claude_code |
-| mavam | registry-only | - | 21 | - | - | - | - | - | - | - |
+| mavam | sampled | 2025-09..2026-02 | 21 | 2,543 | 2,543 | 154 | 88 | 981 | 38.6% | claude_code |
 | obra | sampled | 2025-09..2026-02 | 36 | 2,656 | 2,656 | 116 | 202 | 1,388 | 52.3% | claude_code |
 | philipp-spiess | sampled | 2025-09..2026-02 | 15 | 801 | 801 | 69 | 43 | 2 | 0.2% | opencode |
 | ruvnet | sampled | 2025-09..2026-02 | 9 | 5,660 | 5,304 | 117 | 350 | 4,483 | 84.5% | claude_code |
 | steipete | sampled | 2025-09..2026-02 | 71 | 21,222 | 21,222 | 130 | 630 | 65 | 0.3% | codex |
-| teamchong | registry-only | - | 10 | - | - | - | - | - | - | - |
+| teamchong | sampled | 2025-09..2026-02 | 10 | 5,799 | 5,799 | 108 | 295 | 36 | 0.6% | claude_code |
 
 ## Agent Signals
 | Agent | Hits | Share of commit records | Developers with signal |
 | --- | --- | --- | --- |
-| claude_code | 35,477 | 51.9% | 5 |
+| claude_code | 36,493 | 47.5% | 7 |
 | codex | 142 | 0.2% | 4 |
-| cursor | 44 | 0.1% | 3 |
+| cursor | 45 | 0.1% | 4 |
 | opencode | 22 | 0.0% | 3 |
 | amp | 12 | 0.0% | 1 |
 | sweep | 2 | 0.0% | 1 |
