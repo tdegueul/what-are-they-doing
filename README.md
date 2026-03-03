@@ -1,4 +1,4 @@
-# Hyperactive AI-Assisted Developers on GitHub: A Commit-Level Dataset
+# What are they doing? A Commit-Level Dataset of Hyperactive AI-augmented Developers on GitHub 
 
 This dataset captures the commit activity of a curated set of highly active, agentic software developers on GitHub. For each developer, it provides full commit metadata and daily commit counts spanning the months around the agentic coding explosion.
 
@@ -10,7 +10,7 @@ The goal of this dataset is to enable studies of AI-augmented software engineeri
 ```bibtex
 @dataset{monperrus2026hyperactive,
   author    = {Thomas Degueule and Bernd Freisleben and Shane McIntosh and Martin Monperrus and Aaron Randrianaina},
-  title     = {Hyperactive AI-Assisted Developers on GitHub: A Commit-Level Dataset},
+  title     = {What are they doing? A Commit-Level Dataset of Hyperactive AI-augmented Developers on GitHub},
   year      = {2026},
   publisher = {Zenodo},
   doi       = {TODO},
