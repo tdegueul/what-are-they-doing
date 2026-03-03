@@ -36,14 +36,14 @@ Then, TODO explain the methodology for qualitative curation.
 ## Covered Developers
 
 | Handle | GitHub | One liner presentation |
-|---|---|---|---|
-| steipete | https://github.com/steipete | TODO |
-| Dicklesworthstone | https://github.com/Dicklesworthstone | TODO |
-| ruvnet | https://github.com/ruvnet | TODO |
-| obra | https://github.com/obra | TODO |
-| philipp-spiess | https://github.com/philipp-spiess | TODO |
-| mavam | https://github.com/mavam | TODO |
-| teamchong | https://github.com/teamchong | TODO |
+|---|---|---|
+| [steipete](steipete.md) | https://github.com/steipete | TODO |
+| [Dicklesworthstone](DICKLESWORTHSTONE.md) | https://github.com/Dicklesworthstone | TODO |
+| [ruvnet](ruvnet.md) | https://github.com/ruvnet | TODO |
+| [obra](obra.md) | https://github.com/obra | TODO |
+| [philipp-spiess](philipp-spiess.md) | https://github.com/philipp-spiess | TODO |
+| [mavam](mavam.md) | https://github.com/mavam | TODO |
+| [teamchong](teamchong.md) | https://github.com/teamchong | TODO |
 
 ## Dataset statistics
 
