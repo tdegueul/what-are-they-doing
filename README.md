@@ -37,13 +37,13 @@ Then, TODO explain the methodology for qualitative curation.
 
 | Handle | GitHub | One liner presentation |
 |---|---|---|
-| [steipete](steipete.md) | https://github.com/steipete | TODO |
-| [Dicklesworthstone](DICKLESWORTHSTONE.md) | https://github.com/Dicklesworthstone | TODO |
-| [ruvnet](ruvnet.md) | https://github.com/ruvnet | TODO |
-| [obra](obra.md) | https://github.com/obra | TODO |
-| [philipp-spiess](philipp-spiess.md) | https://github.com/philipp-spiess | TODO |
-| [mavam](mavam.md) | https://github.com/mavam | TODO |
-| [teamchong](teamchong.md) | https://github.com/teamchong | TODO |
+| [steipete](steipete.md) | [steipete](https://github.com/steipete) | TODO |
+| [Dicklesworthstone](DICKLESWORTHSTONE.md) | [Dicklesworthstone](https://github.com/Dicklesworthstone) | TODO |
+| [ruvnet](ruvnet.md) | [ruvnet](https://github.com/ruvnet) | TODO |
+| [obra](obra.md) | [obra](https://github.com/obra) | TODO |
+| [philipp-spiess](philipp-spiess.md) | [philipp-spiess](https://github.com/philipp-spiess) | TODO |
+| [mavam](mavam.md) | [mavam](https://github.com/mavam) | TODO |
+| [teamchong](teamchong.md) | [teamchong](https://github.com/teamchong) | TODO |
 
 ## Dataset statistics
 

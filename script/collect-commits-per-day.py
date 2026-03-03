@@ -133,7 +133,7 @@ def main() -> None:
             sys.exit(f"Developer '{args.developer}' not found in {DEVELOPERS_FILE}")
         dev_entries = [dev_entry]
 
-    token = keyring.get_password("login2", "github_token")
+    token = keyring.get_password("login2", "github_token_2")
     if not token:
         sys.exit(
             "No GitHub token found in keyring "
