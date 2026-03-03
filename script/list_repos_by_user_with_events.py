@@ -96,7 +96,7 @@ def update_developers_json(handle: str, repo_names: list[str]) -> None:
             dev["repos"] = repo_names
             break
     else:
-        developers.append({"handle": handle, "validated_by": [], "repos": repo_names})
+        developers.append({"handle": handle, "repos": repo_names})
 
     with open(DEVELOPERS_JSON, "w") as f:
         json.dump(developers, f, indent=2)

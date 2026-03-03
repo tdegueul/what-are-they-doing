@@ -1,9 +1,6 @@
 [
   {
     "handle": "steipete",
-    "validated_by": [
-      "our name"
-    ],
     "repos": [
       "openclaw/openclaw",
       "steipete/summarize",
@@ -80,9 +77,6 @@
   },
   {
     "handle": "Dicklesworthstone",
-    "validated_by": [
-      "our name"
-    ],
     "repos": [
       "Dicklesworthstone/asupersync",
       "Dicklesworthstone/pi_agent_rust",
@@ -188,9 +182,6 @@
   },
   {
     "handle": "ruvnet",
-    "validated_by": [
-      "our name"
-    ],
     "repos": [
       "ruvnet/ruflo",
       "ruvnet/ruvector",
