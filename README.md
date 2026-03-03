@@ -46,8 +46,8 @@ In other words, the dataset is intentionally **curated rather than mechanically 
 
 | Handle | Analysis | One liner presentation |
 |---|---|---|
-| [steipete](https://github.com/steipete)  | [./steipete.md](steipete.md) | TODO |
-| [Dicklesworthstone](https://github.com/Dicklesworthstone) | [Dicklesworthstone.md](DICKLESWORTHSTONE.md)  | A developer with ~20(!) Claude Code Max subscriptions |
+| [steipete](https://github.com/steipete)  | [steipete.md](steipete.md) | The creator of Clawdbot/OpenClaw, extremely active and visible on social media about AI coding |
+| [Dicklesworthstone](https://github.com/Dicklesworthstone) | [Dicklesworthstone.md](DICKLESWORTHSTONE.md)  | A developer with ~20(!) $200 [Claude Code Max](https://claude.com/pricing/max) subscriptions |
 | [ruvnet](https://github.com/ruvnet)  | [ruvnet.md](ruvnet.md) | An independent consultant and developer harnessing the power of AI to build high-impact software (top of GitHub's trending repositories for at least 2 days) |
 | [obra](https://github.com/obra)   |[obra.md](obra.md) | A developer who just started his own company and using AI to build software |
 | [philipp-spiess](https://github.com/philipp-spiess)  | [philipp-spiess.md](philipp-spiess.md) | An open-source contributor, proud vibe-coder and AI agent enthusiast |
