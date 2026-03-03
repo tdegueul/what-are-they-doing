@@ -303,6 +303,7 @@ def main() -> None:
             detail = f"  ({', '.join(repo_hits)})" if repo_hits else ""
             print(f"  {key}: {monthly_total}{detail}")
 
+    DEVELOPERS_FILE.write_text(json.dumps(developers, indent=2) + "\n")
     print("\nDone. developers.json updated.")
 
 
