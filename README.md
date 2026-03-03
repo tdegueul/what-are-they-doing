@@ -59,6 +59,9 @@ Additional developpers:
 |---|---|---|
 | [Steve Yegge](https://github.com/steveyegge)| -- | Vibe-coded popular projects beads (issue tracking) and Gas Town (agent orchestration) |
 
+### False Positives
+
+Notes about inspected developers who appeared to be agent-supported but did not meet our qualitative inspection criteria appear in markdown files in the [false positive](false-positive) directory.
 
 ## Dataset statistics
 
