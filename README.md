@@ -43,7 +43,7 @@ Then, TODO explain the methodology for qualitative curation.
 | [obra](https://github.com/obra)   |[obra.md](obra.md) | TODO |
 | [philipp-spiess](https://github.com/philipp-spiess)  | [philipp-spiess.md](philipp-spiess.md) | TODO |
 | [mavam](https://github.com/mavam) | [mavam.md](mavam.md) | TODO |
-| [teamchong](https://github.com/teamchong) | [teamchong.md](teamchong.md) |  TODO |
+| [teamchong](https://github.com/teamchong) | [teamchong.md](teamchong.md) | A developer with a super-human burst of commit productivity followed by a fall from grace |
 
 ## Dataset statistics
 
