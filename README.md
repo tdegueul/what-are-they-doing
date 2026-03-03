@@ -14,8 +14,8 @@ The goal of this dataset is to enable studies of AI-augmented software engineeri
   howpublished     = {Dataset on Zenodo},
   year      = {2026},
   publisher = {Zenodo},
-  doi       = {https://doi.org/10.5281/zenodo.18850301},
-  url       = {https://github.com/tdegueul/what-are-they-doing}
+  doi       = {10.5281/zenodo.18850301},
+  url       = {https://doi.org/10.5281/zenodo.18850301}
 }
 ```
 
@@ -94,7 +94,7 @@ Notes about inspected developers who appeared to be agent-supported but did not 
 | steipete | 2025-09..2026-02 | 71 | 21,222 | 130 | 630 | 65 | 0.3% | codex |
 | teamchong | 2025-09..2026-02 | 10 | 5,799 | 108 | 295 | 36 | 0.6% | claude_code |
 
-## Commits Over Time
+### Commits Over Time
 
 ![Commits per month per developer](figures/commits-over-time-separate.png)
 
@@ -111,7 +111,8 @@ Key findings from the figure:
 ## Dataset Contents
 
 ```
-developers.json                    # Developer registry with metadata and repo data/
+developers.json                    # Developer registry with metadata and repo lists
+data/
   {developer}-{YYYY}-{MM}.json     # Daily commit data per developer per month
   commits/{sha}.json               # Cached per-commit file-level details
 ```
