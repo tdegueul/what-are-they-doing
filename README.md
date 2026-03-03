@@ -52,7 +52,7 @@ In other words, the dataset is intentionally **curated rather than mechanically 
 | [ruvnet](https://github.com/ruvnet)  | [ruvnet.md](ruvnet.md) | An independent consultant and developer harnessing the power of AI to build high-impact software (top of GitHub's trending repositories for at least 2 days) |
 | [obra](https://github.com/obra)   |[obra.md](obra.md) | A developer who just started his own company and using AI to build software |
 | [philipp-spiess](https://github.com/philipp-spiess)  | [philipp-spiess.md](philipp-spiess.md) | An open-source contributor, proud vibe-coder and AI agent enthusiast |
-| [mavam](https://github.com/mavam) | [mavam.md](mavam.md) | TODO |
+| [mavam](https://github.com/mavam) | [mavam.md](mavam.md) | A developer and CEO working on data pipelines for security operations using Claude for productivity |
 | [teamchong](https://github.com/teamchong) | [teamchong.md](teamchong.md) | A developer with a super-human burst of commit productivity followed by a fall from grace |
 
 Additional developpers:
