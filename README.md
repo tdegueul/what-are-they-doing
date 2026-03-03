@@ -35,15 +35,15 @@ Then, TODO explain the methodology for qualitative curation.
 
 ## Covered Developers
 
-| Handle | GitHub | One liner presentation |
+| Handle | Analysis | One liner presentation |
 |---|---|---|
-| [steipete](steipete.md) | [steipete](https://github.com/steipete) | TODO |
-| [Dicklesworthstone](DICKLESWORTHSTONE.md) | [Dicklesworthstone](https://github.com/Dicklesworthstone) | TODO |
-| [ruvnet](ruvnet.md) | [ruvnet](https://github.com/ruvnet) | TODO |
-| [obra](obra.md) | [obra](https://github.com/obra) | TODO |
-| [philipp-spiess](philipp-spiess.md) | [philipp-spiess](https://github.com/philipp-spiess) | TODO |
-| [mavam](mavam.md) | [mavam](https://github.com/mavam) | TODO |
-| [teamchong](teamchong.md) | [teamchong](https://github.com/teamchong) | TODO |
+| [steipete](https://github.com/steipete)  | [./steipete.md](steipete.md) | TODO |
+| [Dicklesworthstone](https://github.com/Dicklesworthstone) | [Dicklesworthstone.md](DICKLESWORTHSTONE.md)  | TODO |
+| [ruvnet](https://github.com/ruvnet)  | [ruvnet.md](ruvnet.md) | TODO |
+| [obra](https://github.com/obra)   |[obra.md](obra.md) | TODO |
+| [philipp-spiess](https://github.com/philipp-spiess)  | [philipp-spiess.md](philipp-spiess.md) | TODO |
+| [mavam](https://github.com/mavam) | [mavam.md](mavam.md) | TODO |
+| [teamchong](https://github.com/teamchong) | [teamchong.md](teamchong.md) |  TODO |
 
 ## Dataset statistics
 
