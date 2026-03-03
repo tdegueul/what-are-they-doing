@@ -224,54 +224,37 @@ def summarize_dataset() -> str:
     aggregate_peak_day, aggregate_peak_count = max(aggregate_daily.items(), key=lambda item: item[1])
 
     overview_rows = [
-        ["Tracked developers in registry", format_int(len(developers))],
-        ["Developers with local monthly snapshots", format_int(len(sampled_developers))],
-        [
-            "Unsampled tracked developers",
-            ", ".join(sorted(dev["handle"] for dev in developers if dev["handle"] not in sampled_developers)) or "-",
-        ],
         ["Observation window", f"{min(aggregate_daily).isoformat()} to {max(aggregate_daily).isoformat()}"],
-        ["Distinct months with snapshots", format_int(len(all_months))],
-        ["Developer-month snapshots", format_int(snapshot_count)],
-        ["Tracked repositories in registry", format_int(tracked_repo_count)],
-        ["Tracked repositories with local snapshots", format_int(sampled_repo_count)],
+        ["Tracked repositories in dataset", format_int(tracked_repo_count)],
         ["Total commits from daily totals", format_int(total_commits)],
-        ["Embedded commit records", format_int(sampled_commit_records)],
-        ["Commit-record coverage", safe_pct(sampled_commit_records, total_commits)],
-        ["Active developer-days", format_int(active_developer_days)],
         ["Peak aggregate day", f"{aggregate_peak_day.isoformat()} ({format_int(aggregate_peak_count)} commits)"],
         [
-            "Commit records with >=1 agent signal",
+            "Commit records with >=1 hard agent signal",
             f"{format_int(agent_commit_records)} / {format_int(sampled_commit_records)} ({safe_pct(agent_commit_records, sampled_commit_records)})",
         ],
-        ["Commit records with >1 agent signal", format_int(multi_agent_commit_records)],
         ["Distinct detected agent labels", format_int(len(agent_hits))],
         [
             "Most frequent detected agent",
             (
-                f"{agent_hits.most_common(1)[0][0]} ({format_int(agent_hits.most_common(1)[0][1])} hits)"
+                f"{agent_hits.most_common(1)[0][0]} ({format_int(agent_hits.most_common(1)[0][1])} commits)"
                 if agent_hits
                 else "-"
             ),
         ],
-        ["Cached commit-detail files", format_int(len(list(COMMITS_DIR.glob('*.json'))))],
     ]
 
     developer_rows: list[list[str]] = []
     for handle in sorted(developer_summaries):
         summary = developer_summaries[handle]
-        status = "sampled" if summary.sampled_months else "registry-only"
         month_span = (
             f"{summary.first_month}..{summary.last_month}" if summary.first_month and summary.last_month else "-"
         )
         developer_rows.append(
             [
                 handle,
-                status,
                 month_span,
                 format_int(summary.tracked_repos),
                 format_int(summary.total_commits) if summary.sampled_months else "-",
-                format_int(summary.sampled_commit_records) if summary.sampled_months else "-",
                 format_int(summary.active_days) if summary.sampled_months else "-",
                 format_int(summary.peak_day_commits) if summary.sampled_months else "-",
                 format_int(summary.agent_commits) if summary.sampled_months else "-",
@@ -310,11 +293,9 @@ def summarize_dataset() -> str:
         render_markdown_table(
             [
                 "Developer",
-                "Status",
                 "Month span",
                 "Tracked repos",
                 "Commits",
-                "Commit records",
                 "Active days",
                 "Peak day",
                 "Agent commits",
