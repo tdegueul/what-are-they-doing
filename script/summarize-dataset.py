@@ -40,7 +40,6 @@ class DeveloperSummary:
     tracked_repos: int
     sampled_months: int = 0
     total_commits: int = 0
-    sampled_commit_records: int = 0
     active_days: int = 0
     peak_day_commits: int = 0
     first_month: str | None = None
@@ -156,7 +155,6 @@ def summarize_dataset() -> str:
     agent_developers: defaultdict[str, set[str]] = defaultdict(set)
     per_developer_agent_hits: defaultdict[str, Counter[str]] = defaultdict(Counter)
     total_commits = 0
-    sampled_commit_records = 0
     agent_commit_records = 0
     multi_agent_commit_records = 0
 
@@ -181,18 +179,15 @@ def summarize_dataset() -> str:
 
         for day_str, day_info in payload.get("days", {}).items():
             day_value = date.fromisoformat(day_str)
-            day_total = int(day_info.get("total_count", 0))
-            aggregate_daily[day_value] += day_total
-            total_commits += day_total
-            summary.total_commits += day_total
-
-            if day_total:
-                summary.active_days += 1
-                summary.peak_day_commits = max(summary.peak_day_commits, day_total)
-
             commits = day_info.get("commits", [])
-            sampled_commit_records += len(commits)
-            summary.sampled_commit_records += len(commits)
+            day_count = len(commits)
+            aggregate_daily[day_value] += day_count
+            total_commits += day_count
+            summary.total_commits += day_count
+
+            if day_count:
+                summary.active_days += 1
+                summary.peak_day_commits = max(summary.peak_day_commits, day_count)
 
             for commit in commits:
                 detail = load_commit_detail(commit.get("sha", ""))
@@ -226,11 +221,11 @@ def summarize_dataset() -> str:
     overview_rows = [
         ["Observation window", f"{min(aggregate_daily).isoformat()} to {max(aggregate_daily).isoformat()}"],
         ["Tracked repositories in dataset", format_int(tracked_repo_count)],
-        ["Total commits from daily totals", format_int(total_commits)],
+        ["Total embedded commit records", format_int(total_commits)],
         ["Peak aggregate day", f"{aggregate_peak_day.isoformat()} ({format_int(aggregate_peak_count)} commits)"],
         [
             "Commit records with >=1 hard agent signal",
-            f"{format_int(agent_commit_records)} / {format_int(sampled_commit_records)} ({safe_pct(agent_commit_records, sampled_commit_records)})",
+            f"{format_int(agent_commit_records)} / {format_int(total_commits)} ({safe_pct(agent_commit_records, total_commits)})",
         ],
         ["Distinct detected agent labels", format_int(len(agent_hits))],
         [
@@ -258,7 +253,7 @@ def summarize_dataset() -> str:
                 format_int(summary.active_days) if summary.sampled_months else "-",
                 format_int(summary.peak_day_commits) if summary.sampled_months else "-",
                 format_int(summary.agent_commits) if summary.sampled_months else "-",
-                safe_pct(summary.agent_commits, summary.sampled_commit_records)
+                safe_pct(summary.agent_commits, summary.total_commits)
                 if summary.sampled_months
                 else "-",
                 summary.top_agent if summary.sampled_months else "-",
@@ -271,16 +266,15 @@ def summarize_dataset() -> str:
             [
                 agent_name,
                 format_int(hit_count),
-                safe_pct(hit_count, sampled_commit_records),
+                safe_pct(hit_count, total_commits),
                 format_int(len(agent_developers[agent_name])),
             ]
         )
 
     notes = [
-        "- `Total commits from daily totals` comes from the `total_count` field in monthly snapshot files.",
-        "- `Embedded commit records` counts commit objects stored inside those snapshots; agent-use metrics are computed on this subset.",
+        "- `Total embedded commit records` counts the commit objects stored inside the monthly snapshot files; all agent-use metrics use this same total as the denominator.",
         "- Agent-use labels are heuristic detections from commit messages, co-author trailers, commit authors, and cached changed-file signals when available.",
-        "- The current local dataset contains monthly snapshots for 5 of the 7 tracked developers listed in `developers.json`.",
+        f"- The current local dataset contains monthly snapshots for {len(sampled_developers)} of the {len(developer_summaries)} tracked developers listed in `developers.json`.",
     ]
 
     sections = [

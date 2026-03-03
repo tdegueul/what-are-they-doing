@@ -77,7 +77,7 @@ Notes about inspected developers who appeared to be agent-supported but did not 
 | --- | --- |
 | Observation window | 2025-09-01 to 2026-02-28 |
 | Tracked repositories in dataset | 260 |
-| Total commits from daily totals | 81,230 |
+| Total commits from daily totals | 76,749 |
 | Peak aggregate day | 2026-02-16 (1,833 commits) |
 | Commit records with >=1 hard agent signal | 36,565 / 76,749 (47.6%) |
 | Distinct detected agent labels | 8 |
