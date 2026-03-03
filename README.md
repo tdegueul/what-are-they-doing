@@ -67,6 +67,7 @@ The following developers are candidates identified during screening; data collec
 | [haasonsaas](https://github.com/haasonsaas) | Top Claude Code user |
 | [Gary Basin](https://github.com/gbasin) | Friend of Dicklesworthstone |
 | [Jesse Vincent](https://github.com/obra) | Creator of "superpowers" skill set |
+| [Brian Krabach](https://github.com/bkrabach) | Works on Microsoft Amplifier |
 
 ### False Positives
 
