@@ -38,12 +38,18 @@ Then, TODO explain the methodology for qualitative curation.
 | Handle | Analysis | One liner presentation |
 |---|---|---|
 | [steipete](https://github.com/steipete)  | [./steipete.md](steipete.md) | TODO |
-| [Dicklesworthstone](https://github.com/Dicklesworthstone) | [Dicklesworthstone.md](DICKLESWORTHSTONE.md)  | TODO |
+| [Dicklesworthstone](https://github.com/Dicklesworthstone) | [Dicklesworthstone.md](DICKLESWORTHSTONE.md)  | A developer with ~20(!) Claude Code Max subscriptions |
 | [ruvnet](https://github.com/ruvnet)  | [ruvnet.md](ruvnet.md) | TODO |
 | [obra](https://github.com/obra)   |[obra.md](obra.md) | TODO |
 | [philipp-spiess](https://github.com/philipp-spiess)  | [philipp-spiess.md](philipp-spiess.md) | TODO |
 | [mavam](https://github.com/mavam) | [mavam.md](mavam.md) | TODO |
 | [teamchong](https://github.com/teamchong) | [teamchong.md](teamchong.md) | A developer with a super-human burst of commit productivity followed by a fall from grace |
+
+Additional developpers:
+| Handle | Analysis | One liner presentation |
+|---|---|---|
+| [Steve Yegge](https://github.com/steveyegge)| [./steveyegge.md] | Vibe-coded popular projects beads (issue tracking) and Gas Town (agent orchestration) |
+
 
 ## Dataset statistics
 
