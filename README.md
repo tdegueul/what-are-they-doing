@@ -65,6 +65,7 @@ The following developers are candidates identified during screening; data collec
 | [kaptinlin](https://github.com/kaptinlin) | In the list of top Claude Code users with visible GitHub activity |
 | [Dexploarer](https://github.com/Dexploarer) | Another top Claude Code user with visible GitHub activity |
 | [haasonsaas](https://github.com/haasonsaas) | Top Claude Code user |
+| [Gary Basin](https://github.com/gbasin) | Friend of Dicklesworthstone |
 
 ### False Positives
 
