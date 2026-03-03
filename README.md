@@ -1,42 +1,96 @@
-# what-are-they-doing
+# Hyperactive AI-Assisted Developers on GitHub: A Commit-Level Dataset
 
-we are consolidating:
-- dataset of 10 AI-crazy developers 
-- dataset of 10 AI-crazy projects (with at least 2 AI-crazy developers )
-- dataset of AI generated commits
+This dataset captures the commit activity of a curated set of highly active, agentic software developers on GitHub. For each developer, it provides full commit metadata and daily commit counts spanning the months around the agentic coding explosion.
 
-Open questions:
+The goal of this dataset is to enable studies of AI-augmented software engineering behavior, agent adoption patterns, repository switching, commit quality, and temporal activity rhythms. The dataset currently covers 7 developers.
 
-- what do they do? what kind of software engineering
-- who commits 24 hour a day.
 
-## Developers
+> **If you use this dataset, please cite it as below.**
 
-GitHub's leaderboard:
-- https://gitista.com/
-- https://committers.top/
+```bibtex
+@dataset{monperrus2026hyperactive,
+  author    = {Thomas Degueule and Bernd Freisleben and Shane McIntosh and Martin Monperrus and Aaron Randrianaina},
+  title     = {Hyperactive AI-Assisted Developers on GitHub: A Commit-Level Dataset},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {TODO},
+  url       = {https://github.com/tdegueul/what-are-they-doing}
+}
+```
 
-Tentative: joaovitoriasilva, nicholaspsmith
+This dataset has been produced at the Bellairs'26 Workshop on Continuous Software Engineering.
 
-How steinpete works:
-  - https://steipete.me/posts/2025/shipping-at-inference-speed
+---
 
-## Claude code commits
-9.6M today
-https://github.com/search?q=%22noreply%40anthropic.com%22&type=commits
+## Data Collection Methodology
+
+Candidate developers are identified with the following sources:
+- AI coding conversation on X/Twitter
+- Github queries (see `script/find_agentic_ai_coders.py`)
+- [Gitista](https://gitista.com/)
+- [committers.top](https://committers.top/)
+
+Then, TODO explain the methodology for qualitative curation.
+
+## Covered Developers
+
+TODO — add table of developers with handle, time range, and commit count.
+
+## Dataset statistics
+
+TODO
+
+---
+
+
+## Dataset Contents
+
+```
+developers.json                    # Developer registry with metadata and repo data/
+  {developer}-{YYYY}-{MM}.json     # Daily commit data per developer per month
+  commits/{sha}.json               # Cached per-commit file-level details
+```
+
+### Developer Registry (`developers.json`)
+
+Each entry contains:
+- `handle` — GitHub username
+- `repos` — list of repositories committed to in the last 90 days
+
+### Monthly Commit Files (`data/{developer}-{YYYY}-{MM}.json`)
+
+Each file contains:
+- `developer` — GitHub handle
+- `month` — `YYYY-MM`
+- `days` — dict keyed by date (`YYYY-MM-DD`), each value containing:
+  - `total_count` — number of commits that day
+  - `sampled` — number of commits with full metadata fetched
+  - `commits` — list of raw GitHub API commit objects
+
+---
 
 ## Scripts
 
 All scripts live in `script/` and read a GitHub token from the system keyring
 (`service="login2"`, `username="github_token"`).
 
-### Data collection
+The [`agent-mining`](https://github.com/labri-progress/agent-mining) repository is included as a submodule and provides the agent-detection heuristics used by `detect-agents.py`.
+
+A GitHub personal access token with `repo` and `read:user` scopes is required, stored in the system keyring:
+
+```python
+import keyring
+keyring.set_password("login2", "github_token", "<your-token>")
+```
+
+### Data Collection
 
 | Script | Description |
 |---|---|
-| `collect-commits-per-day.py` | Collects all commits for a developer in a given month via the GitHub contributionsCollection GraphQL API (includes private repos). Writes `data/{developer}-{YYYY-MM}.json`. Usage: `python script/collect-commits-per-day.py --developer steipete --month 2025-12` |
+| `collect-commits-per-day.py` | Collects all commits for a developer in a given month via the GitHub GraphQL API. Writes `data/{developer}-{YYYY-MM}.json`. Usage: `python script/collect-commits-per-day.py --developer steipete --month 2025-12` |
 | `collect-commit-per-month.py` | Collects monthly commit counts for every developer in `developers.json` by iterating over their non-fork repos (avoids fork inflation). Writes results back to `developers.json`. |
-| `list_repos_by_user_with_events.py` | Fetches all repos where a developer committed in the last 3 months via the GitHub GraphQL contributionsCollection API and updates `developers.json`. |
+| `list_repos_by_user_with_events.py` | Fetches all repos where a developer committed in the last 3 months via the GitHub GraphQL  API. |
+| `collect-tentative-names.py` | Searches GitHub commits for `noreply@anthropic.com` to discover candidate AI-heavy users; filters by commit count and repo count. |
 
 ### Analysis
 
@@ -48,11 +102,11 @@ All scripts live in `script/` and read a GitHub token from the system keyring
 | `visualize-file-touches.py` | Fetches per-commit file details and prints a terminal report covering file categories, change sizes, language hotspots, test/docs coupling, and engineering-signal heuristics. Usage: `python script/visualize-file-touches.py developers.json --author steipete --month 2025-12` |
 | `detect-agents.py` | Detects which coding agents (Claude Code, Cursor, etc.) are used in a developer's commits via agent-mining heuristics (co-author trailers, message patterns, config files). Usage: `python script/detect-agents.py data/steipete-2025-12.json` |
 | `histogram-commit-time.py` | Prints a horizontal bar chart of commit counts by UTC hour from a monthly data file. Usage: `python script/histogram-commit-time.py data/steipete-2025-12.json` |
-| `top10-projects-dec2025.py` | One-off script that lists the top-10 repos where `steipete` committed in December 2025. |
+| `plot-commits-over-time-separate.py` | Same chart with one subplot per developer. Saves to `data/commits-over-time-separate.png`. |
 
-### Typical workflow
+### Typical Workflow
 
-```
+```bash
 # 1. Collect monthly commit data
 python script/collect-commits-per-day.py --developer steipete --month 2025-12
 
@@ -63,11 +117,12 @@ python script/detect-agents.py          data/steipete-2025-12.json
 python script/histogram-commit-time.py  data/steipete-2025-12.json
 python script/analyze-repo-switching.py developers.json --author steipete --month 2025-12
 python script/visualize-file-touches.py developers.json --author steipete --month 2025-12
+
+# 3. Visualise trends
+python script/plot-commits-over-time-separate.py
 ```
 
-## Architecture
-
-We use https://github.com/labri-progress/agent-mining as submodule
+---
 
 
 ## Related Work
@@ -76,25 +131,20 @@ We use https://github.com/labri-progress/agent-mining as submodule
   - Paper: https://arxiv.org/pdf/2601.18341
   - Code/artifacts: https://github.com/labri-progress/agent-mining
 
-- Yu et al. (2024). *Where Is Self-admitted Code Generated by Large Language Models on GitHub?* APSEC 2024, pp. 407–418. Studies self-admitted LLM-generated code (acknowledged via code comments) in GitHub projects with >5 stars: 229 projects and 696 code snippets across five languages (Python, Java, C/C++, JavaScript, TypeScript). Key findings: ChatGPT and Copilot dominate; code appears mainly in small/medium projects led by small teams; LLM-generated snippets are a minor portion of each project, short and low-complexity (algorithms, data structures, text processing); they undergo minimal post-generation modification (bug-related changes 4–12%); and most comments only state LLM use without recording prompts, edits, or test status.
+- Yu et al. (2024). *Where Is Self-admitted Code Generated by Large Language Models on GitHub?* APSEC 2024, pp. 407–418. Studies self-admitted LLM-generated code in GitHub projects with >5 stars: 229 projects and 696 snippets across five languages.
 
-- Alam et al. (2026). *Why Are AI Agent Involved Pull Requests (Fix-Related) Remain Unmerged? An Empirical Study.* Analyzes 8,106 fix-related PRs from five AI coding agents (AIDEV-POP dataset); test failures and prior resolution are the top reasons for non-integration.
+- Alam et al. (2026). *Why Are AI Agent Involved Pull Requests (Fix-Related) Remain Unmerged? An Empirical Study.* Analyzes 8,106 fix-related PRs from five AI coding agents (AIDEV-POP dataset).
 
-- Xu et al. (2025). *code_transformed: The Influence of Large Language Models on Code.* arXiv:2506.12014. Large-scale study of 20,000+ GitHub repos showing measurable shifts in coding style (e.g., snake_case usage) attributable to LLM influence.
+- Xu et al. (2025). *code_transformed: The Influence of Large Language Models on Code.* arXiv:2506.12014. Large-scale study of 20,000+ GitHub repos showing measurable shifts in coding style attributable to LLM influence.
 
-## By products
+---
 
-- We found a bug in the Github search API (includes fork by default, no way to exclude): <https://github.com/orgs/community/discussions/188372>
-- Bug and fix in agent-mining <https://github.com/labri-progress/agent-mining/pull/1>
+## License
 
-# Protocol Sketch
+MIT
 
-1. Select unexplored hyper-active developer [from Gitista](https://gitista.com/).
+---
 
-2. Document the repositories where they commit in x.
+## Contact
 
-3. Collect their commits.
-
-# Notes
-
-- The Github API does not index and support searching over co-authorship, we have to go over all commits one by one.
+Open an issue on the repository https://github.com/tdegueul/what-are-they-doing
