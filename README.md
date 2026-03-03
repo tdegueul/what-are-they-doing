@@ -14,7 +14,7 @@ The goal of this dataset is to enable studies of AI-augmented software engineeri
   howpublished     = {Dataset on Zenodo},
   year      = {2026},
   publisher = {Zenodo},
-  doi       = {TODO},
+  doi       = {https://doi.org/10.5281/zenodo.18850301},
   url       = {https://github.com/tdegueul/what-are-they-doing}
 }
 ```
