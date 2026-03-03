@@ -289,5 +289,20 @@
       "tenzir/codemirror-lang-tql",
       "tenzir/zed-tql"
     ]
+  },
+  {
+    "handle": "teamchong",
+    "repos": [
+      "teamchong/metal0",
+      "teamchong/edgebox",
+      "teamchong/lanceql",
+      "teamchong/termweb",
+      "teamchong/zell",
+      "teamchong/vectorjson",
+      "teamchong/codesift",
+      "teamchong/edgeq",
+      "bytecodealliance/wasm-micro-runtime",
+      "ghostty-org/ghostty"
+    ]
   }
 ]
