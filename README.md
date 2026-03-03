@@ -59,6 +59,7 @@ Additional developpers:
 | Handle | Analysis | One liner presentation |
 |---|---|---|
 | [Steve Yegge](https://github.com/steveyegge)| -- | Vibe-coded popular projects beads (issue tracking) and Gas Town (agent orchestration) |
+| [kaptinlin](https://github.com/kaptinlin) | -- | in the list of top Claude Code users & with visible github activity |
 
 ### False Positives
 
