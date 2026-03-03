@@ -8,7 +8,7 @@ The goal of this dataset is to enable studies of AI-augmented software engineeri
 > **If you use this dataset, please cite it as below.**
 
 ```bibtex
-@dataset{monperrus2026hyperactive,
+@dataset{whataretheydoing2026,
   author    = {Thomas Degueule and Bernd Freisleben and Shane McIntosh and Martin Monperrus and Aaron Randrianaina},
   title     = {What are they doing? A Commit-Level Dataset of Hyperactive AI-augmented Developers on GitHub},
   year      = {2026},
