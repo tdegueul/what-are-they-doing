@@ -30,6 +30,7 @@ Candidate developers are identified with the following sources:
 - Github queries (see `script/find_agentic_ai_coders.py`)
 - [Gitista](https://gitista.com/)
 - [committers.top](https://committers.top/)
+- Another possibility: [top claude code users](https://www.claudecount.com). Needs to be linked to github profiles though
 
 Selection is then performed as a qualitative curation process by a team of expert software engineering researchers. We do not rely on a single automatic rule. Instead, we combine automated evidence with manual assessment of each candidate developer and their repositories.
 
