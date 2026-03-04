@@ -66,21 +66,21 @@ Notes about inspected developers who appeared to be agent-supported but did not 
 | --- | --- |
 | Observation window | 2025-09-01 to 2026-02-28 |
 | Tracked repositories in dataset | 260 |
-| Total commits from daily totals | 76,749 |
+| Total commits from daily totals | 76,398 |
 | Peak aggregate day | 2026-02-16 (1,833 commits) |
-| Commit records with >=1 hard agent signal | 36,565 / 76,749 (47.6%) |
+| Commit records with >=1 hard agent signal | 36,277 / 76,398 (47.5%) |
 | Distinct detected agent labels | 8 |
-| Most frequent detected agent | claude_code (36,493 commits) |
+| Most frequent detected agent | claude_code (36,205 commits) |
 
 ### Developer Coverage
 | Developer | Month span | Tracked repos | Commits | Active days | Peak day | Agent commits | Agent % | Top agent |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Dicklesworthstone | 2025-09..2026-02 | 100 | 42,549 | 127 | 1,115 | 29,610 | 77.1% | claude_code |
+| Dicklesworthstone | 2025-09..2026-02 | 100 | 38,316 | 127 | 1,115 | 29,517 | 77.0% | claude_code |
 | mavam | 2025-09..2026-02 | 21 | 2,543 | 154 | 88 | 981 | 38.6% | claude_code |
 | obra | 2025-09..2026-02 | 36 | 2,656 | 116 | 202 | 1,388 | 52.3% | claude_code |
 | philipp-spiess | 2025-09..2026-02 | 15 | 801 | 69 | 43 | 2 | 0.2% | opencode |
-| ruvnet | 2025-09..2026-02 | 9 | 5,660 | 117 | 350 | 4,483 | 84.5% | claude_code |
-| steipete | 2025-09..2026-02 | 71 | 21,222 | 130 | 630 | 65 | 0.3% | codex |
+| ruvnet | 2025-09..2026-02 | 9 | 5,063 | 117 | 350 | 4,288 | 84.7% | claude_code |
+| steipete | 2025-09..2026-02 | 71 | 21,220 | 130 | 630 | 65 | 0.3% | codex |
 | teamchong | 2025-09..2026-02 | 10 | 5,799 | 108 | 295 | 36 | 0.6% | claude_code |
 
 ### Commits Over Time
